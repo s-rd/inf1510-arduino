@@ -37,9 +37,9 @@ const int neos[2][3][2] = {
   },
 };
 
-
-// Adafruit_NeoPixel neos[2] = {Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800), Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800);
-
+/*
+Adafruit_NeoPixel neos[2] = {Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800), Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800);
+*/
 
 
 Adafruit_NeoPixel neo = Adafruit_NeoPixel(96, neo1pin, NEO_GRB + NEO_KHZ800);
@@ -56,7 +56,7 @@ const int
   but1C = 28,
   but2A = 30,
   but2B = 32,
-  but2C = 34;
+  but2C = 10;
 const int buttonDelay = 1000;
 const int questionTime = 15000;
 const int coolDownTime = 3000;
@@ -101,7 +101,6 @@ void setup() {
   pinMode(but2A, INPUT_PULLUP);
   pinMode(but2B, INPUT_PULLUP);
   pinMode(but2C, INPUT_PULLUP);
-
 
   lcds[0].print("Starter opp!");
   lcds[1].print("Starter opp!");
@@ -251,16 +250,23 @@ void printQuestion() {
   question = question + (questionCount + 1);
   
   displayText(question, 1, true, 0);
+  displayText(question, 1, true, 1);
+  
   delay(2000);
   lcds[0].clear();
-  lcds[0].clear();
+  lcds[1].clear();
   displayText(curQuestion[0], 1, true, 0);
+  displayText(curQuestion[0], 1, true, 1);
   delay(2000);
 
   
   displayText("A: " + curQuestion[1], 1, false, 0);
   displayText("B: " + curQuestion[2], 2, false, 0);
   displayText("C: " + curQuestion[3], 3, false, 0);
+
+  displayText("A: " + curQuestion[1], 1, false, 1);
+  displayText("B: " + curQuestion[2], 2, false, 1);
+  displayText("C: " + curQuestion[3], 3, false, 1);
 }
 void setQuestion(int id) {
   for (int i = 0; i < 5; i++) {
@@ -308,6 +314,8 @@ boolean answerQuestion(int answer, int team) {
     case 1:
       team2HasAnswered = true;
       break;
+    default:
+    break;
   }
 
   teamsAnswered++;
@@ -319,7 +327,7 @@ void listenForAnswers() {
     if (!digitalRead(but1A)) {
       answerQuestion(0, 0);
     }
-    else if (!digitalRead(but1B)) 
+    else if (!digitalRead(but1B)) {
       answerQuestion(1, 0);
     }
     else if (!digitalRead(but1C)) {
