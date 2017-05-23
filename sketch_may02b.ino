@@ -1,5 +1,4 @@
 using namespace std;
-#include <string.h>
 #include <Adafruit_NeoPixel.h>
 #include <LiquidCrystal.h>
 
@@ -22,12 +21,8 @@ LiquidCrystal lcds[2] = {LiquidCrystal(33, 31, 29, 27, 25, 23), LiquidCrystal(45
 
 /* Led rings */
 const int 
-  neo1Apin = 34,
-  neo1Bpin = 36,
-  neo1Cpin = 38,
-  neo2Apin = 40,
-  neo2Bpin = 42,
-  neo2Cpin = 44;
+  neo1pin = 34,
+  neo2pin = 36;
 const int BRIGHTNESS = 100;
 const int neos[2][3][2] = {
   {
@@ -41,8 +36,15 @@ const int neos[2][3][2] = {
     { 80, 96 },
   },
 };
-Adafruit_NeoPixel neo = Adafruit_NeoPixel(96, neo1Apin, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel neo2 = Adafruit_NeoPixel(48, neo1Apin, NEO_GRB + NEO_KHZ800);
+
+
+// Adafruit_NeoPixel neos[2] = {Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800), Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800);
+
+
+
+Adafruit_NeoPixel neo = Adafruit_NeoPixel(96, neo1pin, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel neo2 = Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800);
+
 
 
 /* Globals */
@@ -93,12 +95,13 @@ void setup() {
   team1HasAnswered = false;
   team2HasAnswered = false;
 
-  pinMode(but1A, INPUT);
-  pinMode(but1B, INPUT);
-  pinMode(but1C, INPUT);
-  pinMode(but2A, INPUT);
-  pinMode(but2B, INPUT);
-  pinMode(but2C, INPUT);
+  pinMode(but1A, INPUT_PULLUP);
+  pinMode(but1B, INPUT_PULLUP);
+  pinMode(but1C, INPUT_PULLUP);
+  pinMode(but2A, INPUT_PULLUP);
+  pinMode(but2B, INPUT_PULLUP);
+  pinMode(but2C, INPUT_PULLUP);
+
 
   lcds[0].print("Starter opp!");
   lcds[1].print("Starter opp!");
@@ -313,26 +316,26 @@ boolean answerQuestion(int answer, int team) {
 void listenForAnswers() {
   /* Team 1 */
   if (!team1HasAnswered) {
-    if (digitalRead(but1A)) {
+    if (!digitalRead(but1A)) {
       answerQuestion(0, 0);
     }
-    else if (digitalRead(but1B)) {
+    else if (!digitalRead(but1B)) 
       answerQuestion(1, 0);
     }
-    else if (digitalRead(but1C)) {
+    else if (!digitalRead(but1C)) {
       answerQuestion(2, 0);
     }
   }
 
   /* Team 2 */
   if (!team2HasAnswered) {
-    if (digitalRead(but2A)) {
+    if (!digitalRead(but2A)) {
       answerQuestion(0, 1);
     }
-    else if (digitalRead(but2B)) {
+    else if (!digitalRead(but2B)) {
       answerQuestion(1, 1);
     }
-    else if (digitalRead(but2C)) {
+    else if (!digitalRead(but2C)) {
       answerQuestion(2, 1);
     }
   }
