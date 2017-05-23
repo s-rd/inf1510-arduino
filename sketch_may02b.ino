@@ -49,13 +49,12 @@ Adafruit_NeoPixel neo2 = Adafruit_NeoPixel(48, neo1Apin, NEO_GRB + NEO_KHZ800);
 unsigned long curTime;
 
 const int
-  but1A = 10,
-  // but1A = 22,
-  but1B = 24,
-  but1C = 26,
-  but2A = 28,
-  but2B = 30,
-  but2C = 32;
+  but1A = 24,
+  but1B = 26,
+  but1C = 28,
+  but2A = 30,
+  but2B = 32,
+  but2C = 34;
 const int buttonDelay = 1000;
 const int questionTime = 15000;
 const int coolDownTime = 3000;
