@@ -4,6 +4,7 @@ using namespace std;
 
 
 /* Questions */
+/*
 const int questionAmount = 7;
 const String questions[7][5] = {
   {"Hvem er stats- minister i Norge?",          "Erna Solberg",       "Jens Stoltenberg", "Bjornar Moxnes",   "1" },
@@ -14,6 +15,62 @@ const String questions[7][5] = {
   {"Hvem er leder i Fremskrittspartiet?",       "Audun Lysbakken",    "Siv Jensen",       "Liv Navarsete" ,   "2" },
   {"Hvilket parti er opptatt av landbruk?",     "Mdg",                "SV",               "Senterpartiet",    "3" },
 };
+*/
+const int questionAmount = 14;
+const String questions [14][5] = {
+  {"Hvem er statsminister i Norge?",                                  "Siv Jensen",         "Erna Solberg",     "Jens Stoltenberg",  "2" },
+  {"Hvor mange seter er det pa Stortinget?",                          "150",                "142",              "169",               "3" },
+  {"Hvilke partier sitter i regjering?",                              "Hoyre og FrP", "Hoyre, KrF og FrP", "Venstre, Hoyre, og FrP", "1" },
+  {"Hvilke partier gir parlamentarisk stotte til regjeringen?",       "Venstre", "KrF og FrP", "KrF og Venstre", "3" },
+  {"Hvilken type regjering er den sittende regjeringen?",             "Flertallsregjering", "Mindretallsregjering", "Liketallsregjering", "2" },
+  {"Hvor hoy er sperregrensen?",                                      "4%", "5%", "6%", "1" },
+  {"Hvem er leder for Rodt?",                                         "Trine Skei Grande", "Bjornar Moxnes", "Jens Stoltenberg", "2" },
+  {"Hvilket parti har 'Folk forst' som slagord?",                     "SV", "KrF", "Venstre", "3" },
+  {"Hvem er leder for KrF?",                                          "Knut Arild Hareide", "Karl I. Hagen", "Sylvi Listhaug", "1" },
+  {"Hvilket parti er tradisjonelt opptatt av landbruk?",              "Senterpartiet", "Arbeiderpartiet", "FrP", "1" },
+  {"Hvem har den lovgivende makt i Norge?",                           "Stortinget", "Regjeringen", "Domstolene", "1" },
+  {"Hvem er Norges finansminister?",                                  "Jonas Gahr Store", "Siv Jensen", "Torbjorn Jagland", "2" },
+  {"Hvem er Norges utenriksminister?",                                "Sylvi Listhaug", "Borge Brende", "Hadia Tajik", "2" },
+  {"Hvem er FOR oljeutvinning i Nordland, Troms og Finnmark?",        "Venstre", "FrP", "Rodt", "2" },
+  /*
+  {"Hvem har den utøvende makten i Norge?", "Domstolene", "Stortinget", "Regjeringen", "3" },
+  {"Hva heter samenes folkevalgte forsamling?", "Samestortinget", "Samelauget", "Sametinget", "3" },
+  {"Hvem er leder for et departement?", "Statsminister", "Statsråd", "Departementsdirektør", "2" },
+  {"Hvem er Norges formelle statsoverhode?", "Statsministeren", "Kongen", "Stortingspresidenten", "2" },
+  {"Hvilken styreform har Norge?", "Demokrati", "Oligarki", "Diktatur", "1" },
+  {"Hvilke internasjonalt samarbeid er Norge ikke medlem av?", "NATO", "EU", "FN", "2" },
+  {"Hva er den øverste rettsinstansen i Norge?", "Høyesterett", "Tingretten", "Lagmannsretten", "1" },
+  {"Hva er den strengeste straffen man kan få i Norge?", "Dødsstraff", "18 år fengsel", "21 år fengsel", "3" },
+  {"Hvilken type demokrati har Norge?", "Direkte demokrati", "Indirekte demokrati", "Likhetsdemokrati", "2" },
+  {"Hvilke politiske parti sitter ikke på Stortinget?", "Rødt", "MPG", "SV", "1" },
+  {"Hvor mange folkeavstemninger har Norge hatt om EU-medlemskap?", "Ingen", "2", "4", "2" },
+  {"Hvilken religion er ikke monoteistisk?", "Islam", "Jødedommen", "Hinduismen", "3" },
+  {"Hvilken religion tror på treenigheten?", "Buddhismen", "Kristendommen", "Islam", "2" },
+  {"Hvilken religion er bygget på de fem søylene?", "Islam", "Hinduismen", "Jødedommen", "1" },
+  {"Toraen er en hellige tekst i hvilken religion?", "Islam", "Jødedommen", "Buddhismen", "2" },
+  {"Hva kalles jødedommens gudshus?", "Moské", "Tempel", "Synagoge", "3" },
+  {"Hvem leder bønnen i en moské?", "Presten", "Imamen", "Rabbiner", "2" },
+  {"Hvem er øverste leder for den katolske kirke?", "Dalai Lama", "Paven", "Kardinalen", "2" },
+  {"Hvilken religion feirer høytiden Divali?", "Buddhismen", "Hinduismen", "Jødedommen", "2" },
+  {"Hvilken religion feirer høytiden Hanukka?", "Hinduismen", "Jødedommen", "Kristendommen", "2" },
+  {"Rabbiner er en religiøs leder i hvilken religion?", "Buddhismen", "Islam", "Jødedommen", "3" },
+  {"Hvilken religion feirer Eid?", "Islam", "Kristendommen", "Jødedommen", "1" },
+  {"Hvorfor feirer kristne jul?", "Jesu død", "Jesu fødsel", "Jesu oppstandelse", "2" },
+  {"Hvorfor feirer muslimer Mawlid?", "Muhammeds fødsel", "Muhammeds åpenbaring", "Muhammeds død", "1" },
+  {"Hva er divali?", "Lysfestival", "Nyttårsfeiring", "Blomsterfestival", "1" },
+  {"Hvilken religion feirer Bar / Bat Mitzva?", "Buddhismen", "Jødedommen", "Hinduismen", "2" },
+  {"Hvilken religion feirer Vesak?", "Kristendommen", "Jødedommen", "Buddhismen", "3" },
+  {"Hvilken religion er grunnlagt av Siddharta Gautama?", "Jødedommen", "Buddhismen", "Hinduismen", "2" },
+  {"Talmud er en hellig tekst i hvilken religion?", "Jødedommen", "Hinduismen", "Islam", "1" },
+  {"Hvilken religion anser ikke Jesus som en profet?", "Kristendommen", "Islam", "Hinduismen", "3" },
+  {"Hvilken gruppe er ikke kristne?", "Ortodokse", "Protestanter", "Bukharister", "3" },
+  {"Hvilken religion har flest tilhengere?", "Islam", "Kristendom", "Hinduismen", "2" },
+  {"Hvem tror ikke på reinkarnasjon?", "Buddhister", "Hinduister", "Kristne", "3" },
+  {"Koranen er en hellig tekst i hvilken religion?", "Islam", "Jødedommen", "Buddhismen", "1" },
+  {"Hvor mange testamenter er det i Bibelen?", "2", "3", "4", "2" },
+  {"Hva er ikke en jødisk høytid?", "Hannuka", "Rosj Hasjaná", "Olsok", "3" },
+  */
+};
 
 
 /* Displays */
@@ -21,8 +78,8 @@ LiquidCrystal lcds[2] = {LiquidCrystal(33, 31, 29, 27, 25, 23), LiquidCrystal(45
 
 /* Led rings */
 const int 
-  neo1pin = 34,
-  neo2pin = 36;
+  neo1pin = 11,
+  neo2pin = 12;
 const int BRIGHTNESS = 100;
 const int neos[2][3][2] = {
   {
@@ -42,7 +99,7 @@ Adafruit_NeoPixel neos[2] = {Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ80
 */
 
 
-Adafruit_NeoPixel neo = Adafruit_NeoPixel(96, neo1pin, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel neo = Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel neo2 = Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800);
 
 
@@ -76,6 +133,7 @@ static int nextQuestionId = 0;
 int usedQuestions[questionAmount];
 
 int curPoints;
+int roundPoints[2];
 int points[2];
 
 boolean displayedScores;
@@ -87,6 +145,8 @@ void setup() {
   Serial.begin(9600);
 
   setQuestion(0);
+  resetRoundPoints();
+  
   printNextQuestion = true;
   teamsAnswered = 0;
   questionIsAnswered = false;
@@ -102,8 +162,7 @@ void setup() {
   pinMode(but2B, INPUT_PULLUP);
   pinMode(but2C, INPUT_PULLUP);
 
-  lcds[0].print("Starter opp!");
-  lcds[1].print("Starter opp!");
+  displayOnBoth("Starter opp!", 1, true);
 
   readyNeos();
 }
@@ -117,16 +176,13 @@ void loop() {
   // If next question exists
   if (hasNextQuestion()) {
 
-    // setTeamColor(0,0,255, 0);
-    // setTeamColor(0,0,255, 1);
-
     // If question has not been printed, print it
     if (printNextQuestion) {
-      setTeamColor(0,0,255, 0);
-      setTeamColor(0,0,255, 1);
+      // setTeamColor(0,0,255, 0);
+      // setTeamColor(0,0,255, 1);
 
-      for (int i = 0; i < 32; i++) {        
-        neo2.setPixelColor(i, 0,0,255);
+      for (int i = 0; i < 48; i++) {        
+        neo1.setPixelColor(i, 0,0,255);
         neo2.show();
       }
       printQuestion();
@@ -152,6 +208,7 @@ void loop() {
 
       // Reset for next loop
       resetForNextLoop();
+      resetRoundPoints();
 
       // If there is a next question, display it
       if (hasNextQuestion()) {
@@ -214,7 +271,10 @@ void loop() {
 }
 
 
-
+void resetRoundPoints() {
+  roundPoints[0] = 0;
+  roundPoints[1] = 0;
+}
 void resetForNextLoop() {
   teamsAnswered = 0;
   questionIsAnswered = false;
@@ -236,6 +296,8 @@ boolean hasWaited(unsigned long curTime, int delayTime) {
 }
 
 void printQuestion() {
+  
+  // Print to monitor
   Serial.print("\nSporsmal ");
   Serial.print((questionCount + 1));
   Serial.println(":");
@@ -243,30 +305,23 @@ void printQuestion() {
   Serial.println("A: " + curQuestion[1] + ". B: " + curQuestion[2] + ". C: " + curQuestion[3]);
   Serial.println();
 
-  lcds[0].clear();
-  lcds[1].clear();
+  clearDisplays();
   
   String question = "Sporsmal ";
   question = question + (questionCount + 1);
-  
-  displayText(question, 1, true, 0);
-  displayText(question, 1, true, 1);
+  displayOnBoth(question, 1, true);
   
   delay(2000);
-  lcds[0].clear();
-  lcds[1].clear();
-  displayText(curQuestion[0], 1, true, 0);
-  displayText(curQuestion[0], 1, true, 1);
+  
+  clearDisplays();
+  displayOnBoth(curQuestion[0], 0, false);
+  
   delay(2000);
 
-  
-  displayText("A: " + curQuestion[1], 1, false, 0);
-  displayText("B: " + curQuestion[2], 2, false, 0);
-  displayText("C: " + curQuestion[3], 3, false, 0);
-
-  displayText("A: " + curQuestion[1], 1, false, 1);
-  displayText("B: " + curQuestion[2], 2, false, 1);
-  displayText("C: " + curQuestion[3], 3, false, 1);
+  clearDisplays();
+  displayOnBoth("A: " + curQuestion[1], 0, false);
+  displayOnBoth("B: " + curQuestion[2], 1, false);
+  displayOnBoth("C: " + curQuestion[3], 2, false);
 }
 void setQuestion(int id) {
   for (int i = 0; i < 5; i++) {
@@ -295,7 +350,9 @@ boolean answerQuestion(int answer, int team) {
   boolean isCorrect = (answer == correctAnswer);
   
   if (isCorrect) {
+    roundPoints[team] = curPoints;
     points[team] += curPoints;
+    
     Serial.print("Lag ");
     Serial.print(team);
     Serial.print(": ");
@@ -314,8 +371,6 @@ boolean answerQuestion(int answer, int team) {
     case 1:
       team2HasAnswered = true;
       break;
-    default:
-    break;
   }
 
   teamsAnswered++;
@@ -362,19 +417,16 @@ int getLeadingTeam() {
 }
 
 void displayScores() {
-  for (int i = 0; i < 2; i++) {
-    lcds[i].clear();
-  
-    lcds[i].setCursor(0, 1);
-    lcds[i].print("    Lag 1: ");
-    lcds[i].print(points[0]);
-    lcds[i].print(" p");
-  
-    lcds[i].setCursor(0, 2);
-    lcds[i].print("    Lag 2: ");
-    lcds[i].print(points[1]);
-    lcds[i].print(" p");
-  }
+  clearDisplays();
+
+  String team1Points = " poeng",
+         team2Points = " poeng";
+         
+  team1Points = (roundPoints[0]) + team1Points;
+  team2Points = (roundPoints[1]) + team2Points;
+
+  displayText(team1Points, 1, true, 0);
+  displayText(team2Points, 1, true, 1);
   
   Serial.print("Lag 1: ");
   Serial.print(points[0]);
@@ -388,6 +440,12 @@ void clearLine(int row, int team) {
   lcds[team].print("                    ");
   lcds[team].setCursor(0, row);
 }
+void clearDisplays() {
+  lcds[0].clear();
+  lcds[1].clear();
+}
+
+
 void centerPrintText(String text, int row, int team) {
   lcds[team].setCursor(0, row);
   
@@ -401,23 +459,55 @@ void centerPrintText(String text, int row, int team) {
   // Print text
   lcds[team].print(text);
 }
+
 void displayText(String text, int row, boolean center, int team) {
   clearLine(row, team);
 
-  if (text.length() <= 20) {
+  if (center) { 
+    centerPrintText(text, row, team); 
+    return;
+  }
+  
+  int curLine = row;
+  String curLineText = "";
+  int maxLines = 4;
+  int maxLength = 20;
+  
+  int cutStartPos = 0;
+  int cutStopPos= 20;
 
-    if (center) centerPrintText(text, row, team);
-    else lcds[team].print(text);
+  if (text.length() <= maxLength) {
+
+    lcds[team].setCursor(0, row);
+    lcds[team].print(text);
+      
+  } else {
+
+    String line1 = "", line2 = "", line3 = "", line4 = "";
     
-  } else if (text.length() <= 40) {
+    while (curLine < maxLines) {
 
-    String line1 = "";
-    String line2 = "";
+      clearLine(curLine, team);
+   
+      curLineText = text.substring(cutStartPos, cutStopPos);
+      // Serial.println(curLineText);
+      
+      lcds[team].setCursor(0,curLine);
+      lcds[team].print(curLineText);
+      
+      if (curLineText.length() <= maxLength) {
+        curLine++;
+        cutStartPos += 20;
+        cutStopPos += 20;
+      }
+    }
 
+    /*
     if (text.charAt(19) != ' ') {
       int cutAt = 20;
       for (int i = 20; i > 0; i--) {
         if (text.charAt(i) == ' ') {
+          if (i < 16) break;
           cutAt = i;
           break;
         }
@@ -428,18 +518,17 @@ void displayText(String text, int row, boolean center, int team) {
       line1 = text.substring(0,20);
       line2 = text.substring(20,40);
     }
+  
+    lcds[team].setCursor(0,row), lcds[team].print(line1),
+    lcds[team].setCursor(0,row+1), lcds[team].print(line2);
+    */
 
-    if (center)
-      centerPrintText(line1, row, team),
-      centerPrintText(line2, row+1, team);
-    else
-      lcds[team].setCursor(0,row), lcds[team].print(line1),
-      lcds[team].setCursor(0,row+1), lcds[team].print(line2);
-    
   }
 }
 void displayOnBoth(String text, int row, boolean center) {
-  
+  for (int i = 0; i < 2; i++) {
+    displayText(text, row, center, i);
+  }
 }
 
 void readyScreens() {
