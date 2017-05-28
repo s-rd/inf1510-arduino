@@ -131,7 +131,7 @@ boolean team2HasAnswered;
 boolean questionIsAnswered;
 
 static int questionCount = 0;
-static int nextQuestionId = 0;
+static int curQuestionId = 0;
 
 int usedQuestions[questionAmount];
 
@@ -352,7 +352,7 @@ void loop() {
 
     // Reset if is finished
     if (!digitalRead(playBut) && !hasNextQuestion()) {
-      nextQuestionId = 0;
+      curQuestionId = 0;
       questionCount = 0;
       setQuestion(0);
       resetRoundPoints();
@@ -366,7 +366,11 @@ void loop() {
       printNextQuestion = true;
       teamsAnswered = 0;
       questionIsAnswered = false;
-      displayedScores = false; 
+      displayedScores = false;
+
+      for (int i = 0; i < questionAmount; i++) {
+        usedQuestions[i] = -1;
+      }
     }
 
   }
@@ -391,8 +395,8 @@ void resetForNextLoop() {
   team1Answer = -1;
   team2Answer = -1;
 
+  usedQuestions[questionCount] = curQuestionId;
   questionCount++;
-  nextQuestionId += 1;
   nextQuestion();
 
   prevTime = curTime;
@@ -446,10 +450,23 @@ void setQuestion(int id) {
   }
 }
 void nextQuestion() {
-  setQuestion(nextQuestionId);
+  for (int i = 0; i < questionAmount; i++) {
+    // Going through all questions (1-16)
+    for (int j = 0; j < questionAmount; j++) {
+      // Going through all used questions, check if used
+      if (j != usedQuestions[i]) {
+        curQuestionId = j;
+        goto finished;
+      }
+    }
+  }
+  
+  finished:
+  setQuestion(curQuestionId);
+  
 }
 boolean hasNextQuestion() {
-  if (nextQuestionId < questionAmount) return true;
+  if (questionCount < questionAmount) return true;
   return false;
 }
 int getAnswerId() {
