@@ -1,39 +1,34 @@
-using namespace std;
+
+#include "Pitches.h"
 #include <Adafruit_NeoPixel.h>
 #include <LiquidCrystal.h>
 
-
-/* Questions */
-/*
-const int questionAmount = 7;
-const String questions[7][5] = {
-  {"Hvem er stats- minister i Norge?",          "Erna Solberg",       "Jens Stoltenberg", "Bjornar Moxnes",   "1" },
-  {"Hvilket parti leder Erna Solberg?",         "Arbeiderpartiet",    "Hoyre",            "Venstre"       ,   "2" },
-  {"Hvilket parti har flest medlemmer?",        "Venstre",            "Hoyre",            "Arbeiderpartiet",  "3" },
-  {"Hvilket parti ligger mest mot hoyre?",      "FrP",                "Rodt",             "KrF",              "1" },
-  {"Hvem er leder i Senterpartiet?",            "Siv Jensen",         "Jonas G. Store",   "Trygve S. Vedum",  "3" },
-  {"Hvem er leder i Fremskrittspartiet?",       "Audun Lysbakken",    "Siv Jensen",       "Liv Navarsete" ,   "2" },
-  {"Hvilket parti er opptatt av landbruk?",     "Mdg",                "SV",               "Senterpartiet",    "3" },
-};
-*/
+/* 
+ * Questions 
+ */
 const int questionAmount = 14;
 const String questions [14][5] = {
-  {"Hvem er statsminister i Norge?",                                  "Siv Jensen",         "Erna Solberg",     "Jens Stoltenberg",  "2" },
-  {"Hvor mange seter er det pa Stortinget?",                          "150",                "142",              "169",               "3" },
-  {"Hvilke partier sitter i regjering?",                              "Hoyre og FrP", "Hoyre, KrF og FrP", "Venstre, Hoyre, og FrP", "1" },
-  {"Hvilke partier gir parlamentarisk stotte til regjeringen?",       "Venstre", "KrF og FrP", "KrF og Venstre", "3" },
-  {"Hvilken type regjering er den sittende regjeringen?",             "Flertallsregjering", "Mindretallsregjering", "Liketallsregjering", "2" },
-  {"Hvor hoy er sperregrensen?",                                      "4%", "5%", "6%", "1" },
-  {"Hvem er leder for Rodt?",                                         "Trine Skei Grande", "Bjornar Moxnes", "Jens Stoltenberg", "2" },
-  {"Hvilket parti har 'Folk forst' som slagord?",                     "SV", "KrF", "Venstre", "3" },
-  {"Hvem er leder for KrF?",                                          "Knut Arild Hareide", "Karl I. Hagen", "Sylvi Listhaug", "1" },
-  {"Hvilket parti er tradisjonelt opptatt av landbruk?",              "Senterpartiet", "Arbeiderpartiet", "FrP", "1" },
-  {"Hvem har den lovgivende makt i Norge?",                           "Stortinget", "Regjeringen", "Domstolene", "1" },
-  {"Hvem er Norges finansminister?",                                  "Jonas Gahr Store", "Siv Jensen", "Torbjorn Jagland", "2" },
-  {"Hvem er Norges utenriksminister?",                                "Sylvi Listhaug", "Borge Brende", "Hadia Tajik", "2" },
-  {"Hvem er FOR oljeutvinning i Nordland, Troms og Finnmark?",        "Venstre", "FrP", "Rodt", "2" },
+  {"Hvem er stats-#minister i Norge?#",                                "Siv Jensen",        "Erna Solberg",       "Jens Stoltenberg",  "2" },
+  {"Hvor mange seter er#det pa Stortinget?#",                          "150",               "142",                "169",               "3" },
+  {"Hvor mange testa-#menter er det i#Bibelen?#",                      "2",                 "3",                  "4",                 "1" },
+  // {"Hvilke partier#sitter i regjering?#",                              "Hoyre og FrP",      "Hoyre, KrF og FrP",  "V, H, og FrP",    "1" },
+  {"Hvilke partier gir#parlamentarisk#stotte til#regjeringen?#",       "Venstre", "KrF og FrP", "KrF og Venstre", "3" },
+  {"Hvilken religion#tror pa#treenigheten?#",                          "Buddhismen", "Kristendommen", "Islam", "2" },
+  {"Hva er divali?",                                                  "Lysfestival", "Nyttarsfeiring", "Blomsterfestival", "1" },
+  // {"Hvilken type re-#gjering er den#sittende regjeringen#",            "Flertall", "Mindretall", "Liketall", "2" },
+  {"Hvor hoy er#sperregrensen?#",                                      "4%", "5%", "6%", "1" },
+  {"Hvem er leder#for Rodt?#",                                         "Trine Skei Grande#", "Bjornar Moxnes", "Jens Stoltenberg", "2" },
+  {"Hvilken gruppe er#ikke kristne?#",                                  "Ortodokse", "Protestanter", "Bukharister", "3" },
+  // {"Hvilket parti har#'Folk forst' som#slagord?#",                     "SV", "KrF", "Venstre", "3" },
+  {"Hvem er leder#for KrF?#",                                          "Knut Arild Hareide#", "Karl I. Hagen", "Sylvi Listhaug", "1" },
+  {"Hvilket parti er#tradisjonelt opptatt#av landbruk?#",              "Senterpartiet", "Arbeiderpartiet", "FrP", "1" },
+  {"Hva er den#strengeste straffen#man kan fa i Norge?#",               "Dodsstraff", "18 ar fengsel", "21 ar fengsel", "3" },
+  {"Hvem har den#lovgivende makt i#Norge?#",                           "Stortinget", "Regjeringen", "Domstolene", "1" },
+  {"Hvem er Norges#finansminister?#",                                  "Jonas Gahr Store", "Siv Jensen", "Torbjorn Jagland", "2" },
+  // {"Hvem er Norges#utenriksminister?#",                                "Sylvi Listhaug", "Borge Brende", "Hadia Tajik", "2" },
+  // {"Hvem er FOR olje-#utvinning i Nordland,#Troms og Finnmark?#",      "Venstre", "FrP", "Rodt", "2" },
   /*
-  {"Hvem har den utøvende makten i Norge?", "Domstolene", "Stortinget", "Regjeringen", "3" },
+  {"Hvem har den#utovende makten i#Norge?", "Domstolene", "Stortinget", "Regjeringen", "3" },
   {"Hva heter samenes folkevalgte forsamling?", "Samestortinget", "Samelauget", "Sametinget", "3" },
   {"Hvem er leder for et departement?", "Statsminister", "Statsråd", "Departementsdirektør", "2" },
   {"Hvem er Norges formelle statsoverhode?", "Statsministeren", "Kongen", "Stortingspresidenten", "2" },
@@ -73,40 +68,47 @@ const String questions [14][5] = {
 };
 
 
+
 /* Displays */
 LiquidCrystal lcds[2] = {LiquidCrystal(33, 31, 29, 27, 25, 23), LiquidCrystal(45, 43, 41, 39, 37, 35)};
+
+// arrow right
+byte newChars[3][8] = {
+  {
+    B00000, B00100, B00010, B11111,
+    B00010, B00100, B00000, B00000 
+  },
+  {
+    B00000, B00100, B00010, B11111,
+    B00010, B00100, B00000, B00000 
+  },
+  {
+    B00000, B00100, B00010, B11111,
+    B00010, B00100, B00000, B00000 
+  },
+};
 
 /* Led rings */
 const int 
   neo1pin = 11,
   neo2pin = 12;
-const int BRIGHTNESS = 100;
-const int neos[2][3][2] = {
-  {
-    { 0,  16 },
-    { 16, 32 },
-    { 32, 48 },
-  },
-  {
-    { 48, 64 },
-    { 64, 80 },
-    { 80, 96 },
-  },
+const int BRIGHTNESS = 50;
+const int neoPixels[3][2] = {
+  {0, 16},
+  {16, 32},
+  {32, 48},
 };
-
-/*
-Adafruit_NeoPixel neos[2] = {Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800), Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800);
-*/
-
-
-Adafruit_NeoPixel neo = Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel neo2 = Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800);
-
+Adafruit_NeoPixel neos[2] = { Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800), Adafruit_NeoPixel(48, neo2pin, NEO_GRB + NEO_KHZ800) };
 
 
 /* Globals */
+boolean shouldRun;
+boolean printInfo;
+boolean waitingForTeamsToJoin;
+boolean teamJoined;
 unsigned long curTime;
 
+const int piezo = 52;
 const int
   but1A = 24,
   but1B = 26,
@@ -114,8 +116,9 @@ const int
   but2A = 30,
   but2B = 32,
   but2C = 10;
+const int playBut = 9;
 const int buttonDelay = 1000;
-const int questionTime = 15000;
+const int questionTime = 25000;
 const int coolDownTime = 3000;
 unsigned long prevTime = 0;
 
@@ -133,12 +136,20 @@ static int nextQuestionId = 0;
 int usedQuestions[questionAmount];
 
 int curPoints;
+int neoPoints;
 int roundPoints[2];
 int points[2];
+int team1Answer, team2Answer;
 
 boolean displayedScores;
 
 
+
+
+
+/*
+ * Main
+ */
 
 void setup() {
   readyScreens();
@@ -146,6 +157,10 @@ void setup() {
 
   setQuestion(0);
   resetRoundPoints();
+  shouldRun = false;
+  printInfo = true;
+  waitingForTeamsToJoin = true;
+  teamJoined = false;
   
   printNextQuestion = true;
   teamsAnswered = 0;
@@ -161,116 +176,209 @@ void setup() {
   pinMode(but2A, INPUT_PULLUP);
   pinMode(but2B, INPUT_PULLUP);
   pinMode(but2C, INPUT_PULLUP);
+  pinMode(playBut, INPUT_PULLUP);
 
   displayOnBoth("Starter opp!", 1, true);
 
   readyNeos();
 }
-
 void loop() {
 
   curTime = millis();
-  curPoints = (questionTime - (curTime - prevTime)) / 10;
 
+  /* 
+   * Waiting for teams to join and start 
+   */
+  if (printInfo) {
+    displayOnBoth("Trykk for a bli med!", 1, true);
+    displayOnBoth("Og oppa for a starte", 2, true);
 
-  // If next question exists
-  if (hasNextQuestion()) {
-
-    // If question has not been printed, print it
-    if (printNextQuestion) {
-      // setTeamColor(0,0,255, 0);
-      // setTeamColor(0,0,255, 1);
-
-      for (int i = 0; i < 48; i++) {        
-        neo1.setPixelColor(i, 0,0,255);
-        neo2.show();
-      }
-      printQuestion();
-      printNextQuestion = false; // Dont print it again
-    }
-
-
-    // Listen for answers
-    listenForAnswers();
-
-
-    // If time is up,
-    // or question has been answered by both teams
-    if (hasWaited(curTime, questionTime) || questionIsAnswered) {
-
-      // If one or more teams have not answered
-      if (!questionIsAnswered) {
-        Serial.println("\nTiden er ute!");
-      }
-
-      // Display scores
-      displayScores();
-
-      // Reset for next loop
-      resetForNextLoop();
-      resetRoundPoints();
-
-      // If there is a next question, display it
-      if (hasNextQuestion()) {
-        delay(coolDownTime);
-        printNextQuestion = true;
-      }
-
-    }
-
+    lcds[0].setCursor(0,0);
+    lcds[0].write(byte(0));
+    
+    setTeamColor(0,0,255, 0);
+    setTeamColor(0,0,255, 1);
+    
+    printInfo = false;
   }
+  if (waitingForTeamsToJoin) {
+    //  Check for team 1
+    if (!digitalRead(but1A) || !digitalRead(but1B) || !digitalRead(but1C)) {
+      // team 1 has joined
+      teamJoined = true;
+      setTeamColor(255,255,255, 0);
+      clearLine(2, 0);
+      displayText("Du er med!", 1, true, 0);
+      displayText("Start: trykk oppa", 2, true, 0);
+      tone(piezo, NOTE_C4, 150);
+    }
+    if (!digitalRead(but2A) || !digitalRead(but2B) || !digitalRead(but2C)) {
+      // team 2 has joined
+      teamJoined = true;
+      setTeamColor(255,255,255, 1);
+      clearLine(2, 1);
+      displayText("Du er med!", 1, true, 1);
+      displayText("Start: trykk oppa", 2, true, 1);
+      tone(piezo, NOTE_C4, 150);
+    }
+
+    // A team has joined
+    if (teamJoined) {
+      if (!digitalRead(playBut)) {
+        // Start
+        waitingForTeamsToJoin = false;
+        prevTime = curTime;
+        shouldRun = true;
+        tone(piezo, NOTE_F3, 250);
+      }
+    }
+  }
+  
 
 
-  // If has no more questions and scores have not been displayed
-  if (!hasNextQuestion() && !displayedScores) {
+  /*
+   * Playing
+   */
+  if (shouldRun) {
 
-    // Display scores
-    if (getLeadingTeam() >= 0) {
-      // If there is a winner
-      int w = getLeadingTeam();
-      int l = getLeadingTeam() == 1 ? 0 : 1;
+    curPoints = (questionTime - (curTime - prevTime)) / 10;
+    // neoPoints = ((curPoints * 16) / questionTime);
+    neoPoints = ((((curPoints) - 0) * 16) / 1191) + 0;
 
-      // Print winner message
-      lcds[w].clear();
-      lcds[w].setCursor(5, 1);
-      lcds[w].print("Dere vant!");
-      lcds[w].setCursor(5, 2);
-      lcds[w].print(points[w]);
-      lcds[w].print(" poeng");
-      setTeamColor(0,255,0, w);
+    /* Make leds reflect time left
+    for (int i = neoPoints; i < 0; i--) {
+      neos[0].setPixelColor(neoPoints, 255,255,255);
+      neos[1].setPixelColor(neoPoints, 255,255,255);
+    }
+    
+    
+    if (!team1HasAnswered && !team2HasAnswered) {
+      neos[0].setPixelColor(neoPoints, 255,255,255);
+      neos[0].setPixelColor(neoPoints, 255,255,255);
+      neos[0].show();
+      neos[1].show();
+    }
+    */
+    
+  
+    // If next question exists
+    if (hasNextQuestion()) {
+  
+      // If question has not been printed, print it
+      if (printNextQuestion) {
+        setTeamColor(0,0,255, 0);
+        setTeamColor(0,0,255, 1);
+        
+        printQuestion();
+        printNextQuestion = false; // Dont print it again
+      }
 
-      // Print loser message
-      lcds[l].clear();
-      lcds[l].setCursor(0, 1);
-      lcds[l].print("Kanskje neste gang..");
-      lcds[l].setCursor(5, 2);
-      lcds[l].print(points[l]);
-      lcds[l].print(" poeng");
-      setTeamColor(255,0,0, l);
       
-    } else {
-      // If there is a draw
-      for (int i = 0; i < 2; i++) {
-        lcds[i].clear();
-        lcds[i].setCursor(6, 1);
-        lcds[i].print("Uavgjort");
-        lcds[i].setCursor(5, 2);
-        lcds[i].print(points[i]);
-        lcds[i].print(" poeng!");
+  
+      // Listen for answers
+      listenForAnswers();
+
+      
+  
+      // If time is up,
+      // or question has been answered by both teams
+      if (hasWaited(curTime, questionTime) || questionIsAnswered) {
+  
+        // If one or more teams have not answered
+        if (!questionIsAnswered) {
+          Serial.println("\nTiden er ute!");
+        }
+  
+        // Display scores
+        displayScores();
+  
+        // Reset for next loop
+        resetForNextLoop();
+        resetRoundPoints();
+  
+        // If there is a next question, display it
+        if (hasNextQuestion()) {
+          delay(coolDownTime);
+          printNextQuestion = true;
+        }
+  
       }
+  
     }
-    
-    Serial.print("\nGratulerer til lag ");
-    Serial.print(getLeadingTeam()+1);
-    Serial.println("!");
-    
-    displayedScores = true;
+  
+  
+    // If has no more questions and scores have not been displayed
+    if (!hasNextQuestion() && !displayedScores) {
+  
+      // Display scores
+      if (getLeadingTeam() >= 0) {
+        // If there is a winner
+        int w = getLeadingTeam();
+        int l = getLeadingTeam() == 1 ? 0 : 1;
+  
+        // Print winner message
+        lcds[w].clear();
+        lcds[w].setCursor(5, 1);
+        lcds[w].print("Gratulerer");
+        lcds[w].setCursor(5, 2);
+        lcds[w].print(points[w]);
+        lcds[w].print(" poeng");
+        setTeamColor(0,255,0, w);
+  
+        // Print loser message
+        lcds[l].clear();
+        lcds[l].setCursor(0, 1);
+        lcds[l].print("Kanskje neste gang..");
+        lcds[l].setCursor(5, 2);
+        lcds[l].print(points[l]);
+        lcds[l].print(" poeng");
+        setTeamColor(255,0,0, l);
+        
+      } else {
+        // If there is a draw
+        clearDisplays();
+        for (int i = 0; i < 2; i++) {
+          lcds[i].setCursor(6, 1);
+          lcds[i].print("Uavgjort");
+          lcds[i].setCursor(5, 2);
+          lcds[i].print(points[i]);
+          lcds[i].print(" poeng!");
+        }
+      }
+      displayedScores = true;
+      
+    }
+
+
+    // Reset if is finished
+    if (!digitalRead(playBut) && !hasNextQuestion()) {
+      nextQuestionId = 0;
+      questionCount = 0;
+      setQuestion(0);
+      resetRoundPoints();
+      points[0] = 0;
+      points[1] = 0;
+      shouldRun = false;
+      printInfo = true;
+      waitingForTeamsToJoin = true;
+      teamJoined = false;
+        
+      printNextQuestion = true;
+      teamsAnswered = 0;
+      questionIsAnswered = false;
+      displayedScores = false; 
+    }
+
   }
-
-
 }
 
 
+
+
+
+/*
+ * Resetting data
+ */
 void resetRoundPoints() {
   roundPoints[0] = 0;
   roundPoints[1] = 0;
@@ -280,6 +388,8 @@ void resetForNextLoop() {
   questionIsAnswered = false;
   team1HasAnswered = false;
   team2HasAnswered = false;
+  team1Answer = -1;
+  team2Answer = -1;
 
   questionCount++;
   nextQuestionId += 1;
@@ -287,6 +397,13 @@ void resetForNextLoop() {
 
   prevTime = curTime;
 }
+
+
+
+
+/*
+ * Q and A
+ */
 boolean hasWaited(unsigned long curTime, int delayTime) {
   if ((curTime - prevTime) >= delayTime) {
     prevTime = curTime;
@@ -316,7 +433,7 @@ void printQuestion() {
   clearDisplays();
   displayOnBoth(curQuestion[0], 0, false);
   
-  delay(2000);
+  delay(4000);
 
   clearDisplays();
   displayOnBoth("A: " + curQuestion[1], 0, false);
@@ -339,11 +456,10 @@ int getAnswerId() {
   return curQuestion[4].toInt();
 }
 
-
 boolean answerQuestion(int answer, int team) {
 
+  setRingColor(255,255,255, team, answer, 1);
   
-  setRingColor(255,255,255, team, answer);
   int correctAnswer = getAnswerId();
   correctAnswer--;
   
@@ -367,9 +483,11 @@ boolean answerQuestion(int answer, int team) {
   switch (team) {
     case 0:
       team1HasAnswered = true;
+      team1Answer = answer;
       break;
     case 1:
       team2HasAnswered = true;
+      team2Answer = answer;
       break;
   }
 
@@ -388,6 +506,10 @@ void listenForAnswers() {
     else if (!digitalRead(but1C)) {
       answerQuestion(2, 0);
     }
+    
+    if (!digitalRead(but1A) || !digitalRead(but1B) || !digitalRead(but1C)) {
+      tone(piezo, NOTE_C4, 150);
+    }
   }
 
   /* Team 2 */
@@ -401,6 +523,10 @@ void listenForAnswers() {
     else if (!digitalRead(but2C)) {
       answerQuestion(2, 1);
     }
+    
+    if (!digitalRead(but2A) || !digitalRead(but2B) || !digitalRead(but2C)) {
+      tone(piezo, NOTE_C4, 150);
+    }
   }
 
   /* If both teams have answered, question is answered */
@@ -408,33 +534,33 @@ void listenForAnswers() {
     questionIsAnswered = true;
   }
 }
-
-
 int getLeadingTeam() {
   if (points[0] > points[1]) return 0;
   else if (points[0] < points[1]) return 1;
   else return -1;
 }
 
-void displayScores() {
-  clearDisplays();
 
-  String team1Points = " poeng",
-         team2Points = " poeng";
-         
-  team1Points = (roundPoints[0]) + team1Points;
-  team2Points = (roundPoints[1]) + team2Points;
 
-  displayText(team1Points, 1, true, 0);
-  displayText(team2Points, 1, true, 1);
-  
-  Serial.print("Lag 1: ");
-  Serial.print(points[0]);
-  Serial.print(". Lag 2: ");
-  Serial.println(points[1]);
+
+/*
+ * LCD printing
+ */
+void readyScreens() {
+  lcds[0].begin(20, 4);
+  lcds[0].setCursor(0, 0);
+  lcds[1].begin(20,4);
+  lcds[1].setCursor(0,0);
+
+  for (int i = 0; i < 2; i++) {
+    lcds[i].begin(20, 4);
+    lcds[i].setCursor(0, 0);
+    
+    for (int j = 0; j < 3; j++) {
+      lcds[i].createChar(j, newChars[j]);
+    }
+  }
 }
-
-
 void clearLine(int row, int team) {
   lcds[team].setCursor(0, row);
   lcds[team].print("                    ");
@@ -444,8 +570,60 @@ void clearDisplays() {
   lcds[0].clear();
   lcds[1].clear();
 }
+void displayScores() {
+  clearDisplays();
 
+  String team1Points = " poeng",
+         team2Points = " poeng";
 
+  int correctAnswer = curQuestion[4].toInt();
+  correctAnswer--;
+
+  // Set team colors
+  for (int i = 0; i < 2; i++) {
+    setTeamColor(255,0,0, i);
+  }
+  
+
+  /*
+   * Alle ringar gront viss rett, rodt viss ikkje (prikka gront rundt det rette svaret)
+   */
+  if (team1HasAnswered) {
+    if (team1Answer == correctAnswer) {
+      // Rett svar
+      setTeamColor(0,255,0, 0);
+      displayText("Rett svar!", 1, true, 0);
+    } else {
+      // Feil svar
+      setRingColor(0,0,0,   0, correctAnswer, 1);
+      setRingColor(0,255,0, 0, correctAnswer, 2);
+      displayText("Feil svar!", 1, true, 0);
+    }
+  }
+  if (team2HasAnswered) {
+    if (team2Answer == correctAnswer) {
+      // Rett svar
+      setTeamColor(0,255,0, 1);
+      displayText("Rett svar!", 1, true, 1);
+    } else {
+      // Feil svar
+      setRingColor(0,0,0,   1, correctAnswer, 1);
+      setRingColor(0,255,0, 1, correctAnswer, 2);
+      displayText("Feil svar!", 1, true, 1);
+    }
+  }
+  
+  team1Points = (roundPoints[0]) + team1Points;
+  team2Points = (roundPoints[1]) + team2Points;
+
+  displayText(team1Points, 2, true, 0);
+  displayText(team2Points, 2, true, 1);
+  
+  Serial.print("Lag 1: ");
+  Serial.print(points[0]);
+  Serial.print(". Lag 2: ");
+  Serial.println(points[1]);
+}
 void centerPrintText(String text, int row, int team) {
   lcds[team].setCursor(0, row);
   
@@ -459,7 +637,6 @@ void centerPrintText(String text, int row, int team) {
   // Print text
   lcds[team].print(text);
 }
-
 void displayText(String text, int row, boolean center, int team) {
   clearLine(row, team);
 
@@ -468,14 +645,9 @@ void displayText(String text, int row, boolean center, int team) {
     return;
   }
   
-  int curLine = row;
-  String curLineText = "";
   int maxLines = 4;
   int maxLength = 20;
   
-  int cutStartPos = 0;
-  int cutStopPos= 20;
-
   if (text.length() <= maxLength) {
 
     lcds[team].setCursor(0, row);
@@ -483,45 +655,31 @@ void displayText(String text, int row, boolean center, int team) {
       
   } else {
 
-    String line1 = "", line2 = "", line3 = "", line4 = "";
-    
-    while (curLine < maxLines) {
+    int curLine = row;
+    String curLineText = "";
+    int cutStartPos = 0;
+    int cutStopPos= 0;
+    int lines = 0;
 
-      clearLine(curLine, team);
-   
-      curLineText = text.substring(cutStartPos, cutStopPos);
-      // Serial.println(curLineText);
-      
-      lcds[team].setCursor(0,curLine);
-      lcds[team].print(curLineText);
-      
-      if (curLineText.length() <= maxLength) {
-        curLine++;
-        cutStartPos += 20;
-        cutStopPos += 20;
+    String printLines[4];
+
+    for (int i = 0; i < 80; i++) {
+      if (text.charAt(i) == '#') {
+          
+        cutStopPos = i;
+        curLineText = text.substring(cutStartPos, cutStopPos);
+        cutStartPos = (cutStopPos+1);
+        
+        printLines[lines] = curLineText;
+        
+        lines++;
       }
     }
 
-    /*
-    if (text.charAt(19) != ' ') {
-      int cutAt = 20;
-      for (int i = 20; i > 0; i--) {
-        if (text.charAt(i) == ' ') {
-          if (i < 16) break;
-          cutAt = i;
-          break;
-        }
-      }
-      line1 = text.substring(0,cutAt);
-      line2 = text.substring(cutAt,40);
-    } else {
-      line1 = text.substring(0,20);
-      line2 = text.substring(20,40);
+    for (int i = 0; i < lines; i++) {
+      lcds[team].setCursor(0, (row+i));
+      lcds[team].print(printLines[i]);
     }
-  
-    lcds[team].setCursor(0,row), lcds[team].print(line1),
-    lcds[team].setCursor(0,row+1), lcds[team].print(line2);
-    */
 
   }
 }
@@ -531,19 +689,12 @@ void displayOnBoth(String text, int row, boolean center) {
   }
 }
 
-void readyScreens() {
-  lcds[0].begin(20, 4);
-  lcds[0].setCursor(0, 0);
-  lcds[1].begin(20,4);
-  lcds[1].setCursor(0,0);
-}
 
 
 
-
-
-/* Led ring funcitions */
-
+/* 
+ * LED rings
+ */
 void colorWipe(uint32_t c, uint8_t wait) {
   /*for(uint16_t i=0; i<strip.numPixels(); i++) {
       strip.setPixelColor(i, c);
@@ -551,42 +702,37 @@ void colorWipe(uint32_t c, uint8_t wait) {
       delay(wait);
   }*/
 }
-void setRingColor(int r,int g,int b, int team, int ring) {
-  for (int i = neos[team][ring][0]; i < neos[team][ring][1]; i++) {
-    neo.setPixelColor(i, r,g,b);
+void setRingColor(int r,int g,int b, int team, int ring, int interval) {
+  for (int i = neoPixels[ring][0]; i < neoPixels[ring][1]; i += interval) {
+    neos[team].setPixelColor(i, r,g,b);
   }
-  neo.show();
+  neos[team].show();
 }
 void setTeamColor(int r,int g,int b, int team) {
-  for (int i = neos[team][0][0]; i < neos[team][2][1]; i++) {
-    setRingColor(r,g,b, team, i);
+  for (int i = 0; i < 3; i++) {
+    setRingColor(r,g,b, team, i, 1);
   }
 }
 void readyNeos() {
   // Define rings
-  
-  /*neos[0][0] = Adafruit_NeoPixel(16, neo1Apin, NEO_GRB + NEO_KHZ800);
-  neos[0][1] = Adafruit_NeoPixel(16, neo1Bpin, NEO_GRB + NEO_KHZ800);
-  neos[0][2] = Adafruit_NeoPixel(16, neo1Cpin, NEO_GRB + NEO_KHZ800);
-  neos[1][0] = Adafruit_NeoPixel(16, neo2Apin, NEO_GRB + NEO_KHZ800);
-  neos[1][1] = Adafruit_NeoPixel(16, neo2Bpin, NEO_GRB + NEO_KHZ800);
-  neos[1][2] = Adafruit_NeoPixel(16, neo2Cpin, NEO_GRB + NEO_KHZ800);
-
-  // Initiate and set brightness
   for (int i = 0; i < 2; i++) {
-    for (int j = 0; j < 3; j++) {
-      neos[i][j].begin();
-      neos[i][j].setBrightness(BRIGHTNESS);
-      neos[i][j].show();
-    }
-  }*/
-  
-  neo.begin();
-  neo.setBrightness(BRIGHTNESS);
-  neo.show();
-  
-  neo2.begin();
-  neo2.setBrightness(BRIGHTNESS);
-  neo2.show();
+    neos[i].begin();
+    neos[i].setBrightness(BRIGHTNESS);
+    neos[i].show();
+  }
 }
+
+
+
+
+/*
+ * Misc
+ */
+int roundUp(int toRound) {
+  return (10 - toRound % 10) + toRound;
+}
+int roundDown(int toRound) {
+  return toRound - toRound % 10;
+}
+
 
