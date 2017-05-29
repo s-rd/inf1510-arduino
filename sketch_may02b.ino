@@ -88,7 +88,7 @@ Adafruit_NeoPixel neos[2] = { Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ80
 
 /* General */
 boolean shouldRun;
-boolean printInfo;
+boolean shouldPrintInfo;
 boolean waitingForTeamsToJoin;
 boolean teamJoined;
 unsigned long curTime;
@@ -144,7 +144,7 @@ void setup() {
 
   /* Make main loop wait for user input */
   shouldRun = false;
-  printInfo = true;
+  shouldPrintInfo = true;
   waitingForTeamsToJoin = true;
   teamJoined = false;
 
@@ -177,7 +177,7 @@ void loop() {
   /* 
    * Waiting for teams to join and start 
    */
-  if (printInfo) {
+  if (shouldPrintInfo) {
     /* Instruct the user in how to start */
     displayOnBoth("Trykk for a bli med!", 1, true);
     displayOnBoth("Og oppa for a starte", 2, true);
@@ -187,7 +187,7 @@ void loop() {
     setTeamColor(0,0,255, 1);
 
     /* Dont print this again */
-    printInfo = false;
+    shouldPrintInfo = false;
   }
   if (waitingForTeamsToJoin) {
     /* Check for teams */
@@ -336,7 +336,7 @@ void loop() {
 
       /* Wait for user input to start */
       shouldRun = false;
-      printInfo = true;
+      shouldPrintInfo = true;
       waitingForTeamsToJoin = true;
       teamJoined = false;
 
