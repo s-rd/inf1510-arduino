@@ -33,13 +33,13 @@ const String questions [questionTotalAmount][5] = {
   
   {"Hvem har den#utovende makten i#Norge?#",                           "Domstolene", "Stortinget", "Regjeringen", "3" },
   {"Hva heter samenes#folkevalgte for-#samling?#",                     "Samestortinget", "Samelauget", "Sametinget", "3" },
-  {"Hvem er leder for#et departement?#",                               "Statsminister", "Statsråd", "Depts.direktør", "2" },
-  {"Hvem er Norges#formelle stats-#overhode?#",                        "Statsministeren", "Kongen", "Stortings-#presidenten#", "2" },
+  {"Hvem er leder for#et departement?#",                               "Statsminister", "Statsrad", "Depts.direktør", "2" },
+  {"Hvem er Norges#formelle stats-#overhode?#",                        "Statsministeren", "Kongen", "Stortings-#   presidenten#", "2" },
   {"Hvilken styreform#har Norge?#",                                    "Demokrati", "Oligarki", "Diktatur", "1" },
   {"Hvilke internasjonale#samarbeid er Norge#ikke medlem av?#",        "NATO", "EU", "FN", "2" },
   {"Hva er den#overste retts-#instansen i Norge?#",                    "Hoyesterett", "Tingretten", "Lagmannsretten", "1" },
   {"Hva er den streng-#este straffen man#kan fa i Norge?#",            "Dodsstraff", "18 ar fengsel", "21 ar fengsel", "3" },
-  {"Hvilken type#demokrati har Norge?#",                               "Direkte demokrati", "Indirekte demokrati", "Likhetsdemokrati", "2" },
+  {"Hvilken type#demokrati har Norge?#",                               "Direkte demokr.", "Indirekte demokr.", "Likhetsdemokr.", "2" },
   {"Hvilke politiske#parti sitter ikke#pa Stortinget?#",               "Rodt", "MPG", "SV", "1" },
   
 /*
@@ -712,18 +712,4 @@ void readyNeos() {
     neos[i].show();
   }
 }
-
-
-
-
-/*
- * Misc
- */
-int roundUp(int toRound) {
-  return (10 - toRound % 10) + toRound;
-}
-int roundDown(int toRound) {
-  return toRound - toRound % 10;
-}
-
 
