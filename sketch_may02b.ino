@@ -6,63 +6,68 @@
 /* 
  * Questions 
  */
-const int questionAmount = 14;
-const String questions [14][5] = {
+const int questionAmount = 10;
+const int questionTotalAmount = 30;
+const String questions [questionTotalAmount][5] = {
   {"Hvem er stats-#minister i Norge?#",                                "Siv Jensen",        "Erna Solberg",       "Jens Stoltenberg",  "2" },
   {"Hvor mange seter er#det pa Stortinget?#",                          "150",               "142",                "169",               "3" },
   {"Hvor mange testa-#menter er det i#Bibelen?#",                      "2",                 "3",                  "4",                 "1" },
-  // {"Hvilke partier#sitter i regjering?#",                              "Hoyre og FrP",      "Hoyre, KrF og FrP",  "V, H, og FrP",    "1" },
+  {"Hvilke partier#sitter i regjering?#",                              "Hoyre og FrP",      "Hoyre, KrF og FrP",  "V, H, og FrP",    "1" },
   {"Hvilke partier gir#parlamentarisk#stotte til#regjeringen?#",       "Venstre", "KrF og FrP", "KrF og Venstre", "3" },
   {"Hvilken religion#tror pa#treenigheten?#",                          "Buddhismen", "Kristendommen", "Islam", "2" },
-  {"Hva er divali?",                                                  "Lysfestival", "Nyttarsfeiring", "Blomsterfestival", "1" },
-  // {"Hvilken type re-#gjering er den#sittende regjeringen#",            "Flertall", "Mindretall", "Liketall", "2" },
+  {"Hva er divali?",                                                   "Lysfestival", "Nyttarsfeiring", "Blomsterfestival", "1" },
+  {"Hvilken type re-#gjering er den#sittende regjeringen#",            "Flertall", "Mindretall", "Liketall", "2" },
   {"Hvor hoy er#sperregrensen?#",                                      "4%", "5%", "6%", "1" },
   {"Hvem er leder#for Rodt?#",                                         "Trine Skei Grande#", "Bjornar Moxnes", "Jens Stoltenberg", "2" },
-  {"Hvilken gruppe er#ikke kristne?#",                                  "Ortodokse", "Protestanter", "Bukharister", "3" },
-  // {"Hvilket parti har#'Folk forst' som#slagord?#",                     "SV", "KrF", "Venstre", "3" },
+  
+  {"Hvilken gruppe er#ikke kristne?#",                                 "Ortodokse", "Protestanter", "Bukharister", "3" },
+  {"Hvilket parti har#'Folk forst' som#slagord?#",                     "SV", "KrF", "Venstre", "3" },
   {"Hvem er leder#for KrF?#",                                          "Knut Arild Hareide#", "Karl I. Hagen", "Sylvi Listhaug", "1" },
   {"Hvilket parti er#tradisjonelt opptatt#av landbruk?#",              "Senterpartiet", "Arbeiderpartiet", "FrP", "1" },
-  {"Hva er den#strengeste straffen#man kan fa i Norge?#",               "Dodsstraff", "18 ar fengsel", "21 ar fengsel", "3" },
+  {"Hva er den#strengeste straffen#man kan fa i Norge?#",              "Dodsstraff", "18 ar fengsel", "21 ar fengsel", "3" },
   {"Hvem har den#lovgivende makt i#Norge?#",                           "Stortinget", "Regjeringen", "Domstolene", "1" },
   {"Hvem er Norges#finansminister?#",                                  "Jonas Gahr Store", "Siv Jensen", "Torbjorn Jagland", "2" },
-  // {"Hvem er Norges#utenriksminister?#",                                "Sylvi Listhaug", "Borge Brende", "Hadia Tajik", "2" },
-  // {"Hvem er FOR olje-#utvinning i Nordland,#Troms og Finnmark?#",      "Venstre", "FrP", "Rodt", "2" },
+  {"Hvem er Norges#utenriksminister?#",                                "Sylvi Listhaug", "Borge Brende", "Hadia Tajik", "2" },
+  {"Hvem er FOR olje-#utvinning i Nordland#Troms og Finnmark?#",       "Venstre", "FrP", "Rodt", "2" },
+  {"Toraen er en hellige#tekst i hvilken#religion?#",                  "Islam", "Jodedommen", "Buddhismen", "2" },
+  
+  {"Hvem har den#utovende makten i#Norge?#",                           "Domstolene", "Stortinget", "Regjeringen", "3" },
+  {"Hva heter samenes#folkevalgte for-#samling?#",                     "Samestortinget", "Samelauget", "Sametinget", "3" },
+  {"Hvem er leder for#et departement?#",                               "Statsminister", "Statsråd", "Depts.direktør", "2" },
+  {"Hvem er Norges#formelle stats-#overhode?#",                        "Statsministeren", "Kongen", "Stortings-#presidenten#", "2" },
+  {"Hvilken styreform#har Norge?#",                                    "Demokrati", "Oligarki", "Diktatur", "1" },
+  {"Hvilke internasjonale#samarbeid er Norge#ikke medlem av?#",        "NATO", "EU", "FN", "2" },
+  {"Hva er den#overste retts-#instansen i Norge?#",                    "Hoyesterett", "Tingretten", "Lagmannsretten", "1" },
+  {"Hva er den streng-#este straffen man#kan fa i Norge?#",            "Dodsstraff", "18 ar fengsel", "21 ar fengsel", "3" },
+  {"Hvilken type#demokrati har Norge?#",                               "Direkte demokrati", "Indirekte demokrati", "Likhetsdemokrati", "2" },
+  {"Hvilke politiske#parti sitter ikke#pa Stortinget?#",               "Rodt", "MPG", "SV", "1" },
+  
+/*
+  {"Hvor mange folke-#avstemninger har#Norge hatt om#EU-medlemskap?#",  "Ingen", "2", "4", "2" },
+  {"Hvilken religion er#ikke monoteistisk?#",                           "Islam", "Jodedommen", "Hinduismen", "3" },
+  {"Hvilken religion#tror pa#treenigheten?#",                           "Buddhismen", "Kristendommen", "Islam", "2" },
+  {"Hvilken religion er#bygget på de#fem soylene?#",                    "Islam", "Hinduismen", "Jodedommen", "1" },
+  {"Hva kalles jode-#dommens gudshus?#",                                  "Moske", "Tempel", "Synagoge", "3" },
+  {"Hvem leder bonnen#i en moske?#",                                    "Presten", "Imamen", "Rabbiner", "2" },
+  {"Hvem er overste#leder for den#katolske kirke?#",                    "Dalai Lama", "Paven", "Kardinalen", "2" },
+  {"Hvilken religion#feirer hoytiden#Divali?#",                         "Buddhismen", "Hinduismen", "Jodedommen", "2" },
+  {"Hvilken religion#feirer hoytiden#Hanukka?#",                        "Hinduismen", "Jodedommen", "Kristendommen", "2" },
+  {"Rabbiner er en#religios leder i#hvilken religion?#",                "Buddhismen", "Islam", "Jodedommen", "3" },
   /*
-  {"Hvem har den#utovende makten i#Norge?", "Domstolene", "Stortinget", "Regjeringen", "3" },
-  {"Hva heter samenes folkevalgte forsamling?", "Samestortinget", "Samelauget", "Sametinget", "3" },
-  {"Hvem er leder for et departement?", "Statsminister", "Statsråd", "Departementsdirektør", "2" },
-  {"Hvem er Norges formelle statsoverhode?", "Statsministeren", "Kongen", "Stortingspresidenten", "2" },
-  {"Hvilken styreform har Norge?", "Demokrati", "Oligarki", "Diktatur", "1" },
-  {"Hvilke internasjonalt samarbeid er Norge ikke medlem av?", "NATO", "EU", "FN", "2" },
-  {"Hva er den øverste rettsinstansen i Norge?", "Høyesterett", "Tingretten", "Lagmannsretten", "1" },
-  {"Hva er den strengeste straffen man kan få i Norge?", "Dødsstraff", "18 år fengsel", "21 år fengsel", "3" },
-  {"Hvilken type demokrati har Norge?", "Direkte demokrati", "Indirekte demokrati", "Likhetsdemokrati", "2" },
-  {"Hvilke politiske parti sitter ikke på Stortinget?", "Rødt", "MPG", "SV", "1" },
-  {"Hvor mange folkeavstemninger har Norge hatt om EU-medlemskap?", "Ingen", "2", "4", "2" },
-  {"Hvilken religion er ikke monoteistisk?", "Islam", "Jødedommen", "Hinduismen", "3" },
-  {"Hvilken religion tror på treenigheten?", "Buddhismen", "Kristendommen", "Islam", "2" },
-  {"Hvilken religion er bygget på de fem søylene?", "Islam", "Hinduismen", "Jødedommen", "1" },
-  {"Toraen er en hellige tekst i hvilken religion?", "Islam", "Jødedommen", "Buddhismen", "2" },
-  {"Hva kalles jødedommens gudshus?", "Moské", "Tempel", "Synagoge", "3" },
-  {"Hvem leder bønnen i en moské?", "Presten", "Imamen", "Rabbiner", "2" },
-  {"Hvem er øverste leder for den katolske kirke?", "Dalai Lama", "Paven", "Kardinalen", "2" },
-  {"Hvilken religion feirer høytiden Divali?", "Buddhismen", "Hinduismen", "Jødedommen", "2" },
-  {"Hvilken religion feirer høytiden Hanukka?", "Hinduismen", "Jødedommen", "Kristendommen", "2" },
-  {"Rabbiner er en religiøs leder i hvilken religion?", "Buddhismen", "Islam", "Jødedommen", "3" },
-  {"Hvilken religion feirer Eid?", "Islam", "Kristendommen", "Jødedommen", "1" },
-  {"Hvorfor feirer kristne jul?", "Jesu død", "Jesu fødsel", "Jesu oppstandelse", "2" },
-  {"Hvorfor feirer muslimer Mawlid?", "Muhammeds fødsel", "Muhammeds åpenbaring", "Muhammeds død", "1" },
-  {"Hva er divali?", "Lysfestival", "Nyttårsfeiring", "Blomsterfestival", "1" },
-  {"Hvilken religion feirer Bar / Bat Mitzva?", "Buddhismen", "Jødedommen", "Hinduismen", "2" },
-  {"Hvilken religion feirer Vesak?", "Kristendommen", "Jødedommen", "Buddhismen", "3" },
-  {"Hvilken religion er grunnlagt av Siddharta Gautama?", "Jødedommen", "Buddhismen", "Hinduismen", "2" },
-  {"Talmud er en hellig tekst i hvilken religion?", "Jødedommen", "Hinduismen", "Islam", "1" },
-  {"Hvilken religion anser ikke Jesus som en profet?", "Kristendommen", "Islam", "Hinduismen", "3" },
-  {"Hvilken gruppe er ikke kristne?", "Ortodokse", "Protestanter", "Bukharister", "3" },
-  {"Hvilken religion har flest tilhengere?", "Islam", "Kristendom", "Hinduismen", "2" },
+  {"Hvilken religion#feirer Eid?#",                                     "Islam", "Kristendommen", "Jodedommen", "1" },
+  {"Hvorfor feirer#kristne jul?#",                                      "Jesu dod", "Jesu fodsel", "Jesu oppstandelse", "2" },
+  // {"Hvorfor feirer#muslimer Mawlid?#",                                  "Muhammeds fodsel", "Muhammeds apenbaring", "Muhammeds død", "1" },
+  {"Hvem tror ikke#pa reinkarnasjon?#",                                 "Buddhister", "Hinduister", "Kristne", "3" },
+  {"Hvilken religion#feirer Bar/Bat#Mitzva?#",                          "Buddhismen", "Jodedommen", "Hinduismen", "2" },
+  {"Hvilken religion#feirer Vesak?#",                                   "Kristendommen", "Jodedommen", "Buddhismen", "3" },
+  {"Hvilken religion er#grunnlagt av#Siddharta Gautama?#",              "Jodedommen", "Buddhismen", "Hinduismen", "2" },
+  {"Talmud er en hellig#tekst i hvilken#religion?#",                    "Jodedommen", "Hinduismen", "Islam", "1" },
+  {"Hvilken religion#anser ikke Jesus#som en profet?#",                 "Kristendommen", "Islam", "Hinduismen", "3" },
+  {"Hvilken religion har#flest tilhengere?#",                           "Islam", "Kristendom", "Hinduismen", "2" },
+  {"Koranen er en#hellig tekst i#hvilken religion?#",                   "Islam", "Jodedommen", "Buddhismen", "1" },
+
+  /*
   {"Hvem tror ikke på reinkarnasjon?", "Buddhister", "Hinduister", "Kristne", "3" },
-  {"Koranen er en hellig tekst i hvilken religion?", "Islam", "Jødedommen", "Buddhismen", "1" },
-  {"Hvor mange testamenter er det i Bibelen?", "2", "3", "4", "2" },
   {"Hva er ikke en jødisk høytid?", "Hannuka", "Rosj Hasjaná", "Olsok", "3" },
   */
 };
@@ -72,21 +77,6 @@ const String questions [14][5] = {
 /* Displays */
 LiquidCrystal lcds[2] = {LiquidCrystal(33, 31, 29, 27, 25, 23), LiquidCrystal(45, 43, 41, 39, 37, 35)};
 
-// arrow right
-byte newChars[3][8] = {
-  {
-    B00000, B00100, B00010, B11111,
-    B00010, B00100, B00000, B00000 
-  },
-  {
-    B00000, B00100, B00010, B11111,
-    B00010, B00100, B00000, B00000 
-  },
-  {
-    B00000, B00100, B00010, B11111,
-    B00010, B00100, B00000, B00000 
-  },
-};
 
 /* Led rings */
 const int 
@@ -130,10 +120,11 @@ boolean team1HasAnswered;
 boolean team2HasAnswered;
 boolean questionIsAnswered;
 
-static int questionCount = 0;
-static int nextQuestionId = 0;
+int questionCount = 0;
+int curQuestionId = 0;
 
-int usedQuestions[questionAmount];
+// int usedQuestions[questionAmount];
+int questionsLeft[questionAmount];
 
 int curPoints;
 int neoPoints;
@@ -193,8 +184,8 @@ void loop() {
     displayOnBoth("Trykk for a bli med!", 1, true);
     displayOnBoth("Og oppa for a starte", 2, true);
 
-    lcds[0].setCursor(0,0);
-    lcds[0].write(byte(0));
+    // lcds[0].setCursor(0,0);
+    // lcds[0].write(byte(0));
     
     setTeamColor(0,0,255, 0);
     setTeamColor(0,0,255, 1);
@@ -202,7 +193,7 @@ void loop() {
     printInfo = false;
   }
   if (waitingForTeamsToJoin) {
-    //  Check for team 1
+    //  Check for teams
     if (!digitalRead(but1A) || !digitalRead(but1B) || !digitalRead(but1C)) {
       // team 1 has joined
       teamJoined = true;
@@ -242,10 +233,10 @@ void loop() {
   if (shouldRun) {
 
     curPoints = (questionTime - (curTime - prevTime)) / 10;
-    // neoPoints = ((curPoints * 16) / questionTime);
-    neoPoints = ((((curPoints) - 0) * 16) / 1191) + 0;
 
-    /* Make leds reflect time left
+    /*
+    neoPoints = ((((curPoints) - 0) * 16) / 1191) + 0;
+    // Make leds reflect time left
     for (int i = neoPoints; i < 0; i--) {
       neos[0].setPixelColor(neoPoints, 255,255,255);
       neos[1].setPixelColor(neoPoints, 255,255,255);
@@ -268,8 +259,8 @@ void loop() {
       if (printNextQuestion) {
         setTeamColor(0,0,255, 0);
         setTeamColor(0,0,255, 1);
-        
         printQuestion();
+        
         printNextQuestion = false; // Dont print it again
       }
 
@@ -349,12 +340,17 @@ void loop() {
       
     }
 
-
     // Reset if is finished
     if (!digitalRead(playBut) && !hasNextQuestion()) {
-      nextQuestionId = 0;
+      
+      if (curQuestionId < questionTotalAmount) {
+        setQuestion(curQuestionId);
+      } else {
+        curQuestionId = 0;
+        setQuestion(0);
+      }
+      
       questionCount = 0;
-      setQuestion(0);
       resetRoundPoints();
       points[0] = 0;
       points[1] = 0;
@@ -366,10 +362,11 @@ void loop() {
       printNextQuestion = true;
       teamsAnswered = 0;
       questionIsAnswered = false;
-      displayedScores = false; 
+      displayedScores = false;
     }
 
   }
+  
 }
 
 
@@ -392,7 +389,6 @@ void resetForNextLoop() {
   team2Answer = -1;
 
   questionCount++;
-  nextQuestionId += 1;
   nextQuestion();
 
   prevTime = curTime;
@@ -446,10 +442,11 @@ void setQuestion(int id) {
   }
 }
 void nextQuestion() {
-  setQuestion(nextQuestionId);
+  curQuestionId++;
+  setQuestion(curQuestionId);
 }
 boolean hasNextQuestion() {
-  if (nextQuestionId < questionAmount) return true;
+  if (questionCount < questionAmount) return true;
   return false;
 }
 int getAnswerId() {
@@ -530,9 +527,7 @@ void listenForAnswers() {
   }
 
   /* If both teams have answered, question is answered */
-  if (teamsAnswered > 1) {
-    questionIsAnswered = true;
-  }
+  if (teamsAnswered > 1) questionIsAnswered = true;
 }
 int getLeadingTeam() {
   if (points[0] > points[1]) return 0;
@@ -555,10 +550,6 @@ void readyScreens() {
   for (int i = 0; i < 2; i++) {
     lcds[i].begin(20, 4);
     lcds[i].setCursor(0, 0);
-    
-    for (int j = 0; j < 3; j++) {
-      lcds[i].createChar(j, newChars[j]);
-    }
   }
 }
 void clearLine(int row, int team) {
