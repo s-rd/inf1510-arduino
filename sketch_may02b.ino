@@ -173,6 +173,7 @@ void loop() {
   // Update time
   curTime = millis();
 
+
   /* 
    * Waiting for teams to join and start 
    */
