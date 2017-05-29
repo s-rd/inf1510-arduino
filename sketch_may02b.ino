@@ -87,11 +87,11 @@ const int neoPixels[3][2] = {
 Adafruit_NeoPixel neos[2] = { Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800), Adafruit_NeoPixel(48, neo2pin, NEO_GRB + NEO_KHZ800) };
 
 /* General */
+unsigned long curTime;
 boolean shouldRun;
 boolean shouldPrintInfo;
 boolean waitingForTeamsToJoin;
 boolean teamJoined;
-unsigned long curTime;
 boolean displayedScores;
 
 /* Pins */
