@@ -1,11 +1,8 @@
-
 #include "Pitches.h"
 #include <Adafruit_NeoPixel.h>
 #include <LiquidCrystal.h>
 
-/* 
- * Questions 
- */
+/* Questions */
 const int questionAmount = 10;
 const int questionTotalAmount = 30;
 const String questions [questionTotalAmount][5] = {
@@ -77,7 +74,6 @@ const String questions [questionTotalAmount][5] = {
 /* Displays */
 LiquidCrystal lcds[2] = {LiquidCrystal(33, 31, 29, 27, 25, 23), LiquidCrystal(45, 43, 41, 39, 37, 35)};
 
-
 /* Led rings */
 const int 
   neo1pin = 11,
@@ -90,50 +86,45 @@ const int neoPixels[3][2] = {
 };
 Adafruit_NeoPixel neos[2] = { Adafruit_NeoPixel(48, neo1pin, NEO_GRB + NEO_KHZ800), Adafruit_NeoPixel(48, neo2pin, NEO_GRB + NEO_KHZ800) };
 
-
-/* Globals */
+/* General */
 boolean shouldRun;
 boolean printInfo;
 boolean waitingForTeamsToJoin;
 boolean teamJoined;
 unsigned long curTime;
+boolean displayedScores;
 
+/* Pins */
 const int piezo = 52;
-const int
-  but1A = 24,
-  but1B = 26,
-  but1C = 28,
-  but2A = 30,
-  but2B = 32,
-  but2C = 10;
 const int playBut = 9;
+const int 
+  but1A = 24, but2A = 30,
+  but1B = 26, but2B = 32,
+  but1C = 28, but2C = 10;
+
+/* Timing */
 const int buttonDelay = 1000;
 const int questionTime = 25000;
 const int coolDownTime = 3000;
 unsigned long prevTime = 0;
 
+/* Question */
 String curQuestion[5];
 boolean printNextQuestion;
-
-int teamsAnswered;
-boolean team1HasAnswered;
-boolean team2HasAnswered;
-boolean questionIsAnswered;
-
 int questionCount = 0;
 int curQuestionId = 0;
 
-// int usedQuestions[questionAmount];
-int questionsLeft[questionAmount];
+/* Answers */
+int team1Answer,
+    team2Answer;
+boolean team1HasAnswered = false;
+boolean team2HasAnswered = false;
+boolean questionIsAnswered;
 
-int curPoints;
-int neoPoints;
-int roundPoints[2];
-int points[2];
-int team1Answer, team2Answer;
-
-boolean displayedScores;
-
+/* Points */
+int curPoints;         // Current points available
+int roundPoints[2];    // Team's points in a round
+int points[2];         // Team's total points
 
 
 
@@ -143,24 +134,26 @@ boolean displayedScores;
  */
 
 void setup() {
+  /* Prepare LCD displays */
   readyScreens();
   Serial.begin(9600);
 
+  /* Set question, prepare question data */
   setQuestion(0);
   resetRoundPoints();
+
+  /* Make main loop wait for user input */
   shouldRun = false;
   printInfo = true;
   waitingForTeamsToJoin = true;
   teamJoined = false;
-  
+
+  /* Dont print questions until user is ready */
   printNextQuestion = true;
-  teamsAnswered = 0;
   questionIsAnswered = false;
   displayedScores = false;
 
-  team1HasAnswered = false;
-  team2HasAnswered = false;
-
+  /* Prepare inputs */
   pinMode(but1A, INPUT_PULLUP);
   pinMode(but1B, INPUT_PULLUP);
   pinMode(but1C, INPUT_PULLUP);
@@ -169,31 +162,34 @@ void setup() {
   pinMode(but2C, INPUT_PULLUP);
   pinMode(playBut, INPUT_PULLUP);
 
+  /* Display loading message */
   displayOnBoth("Starter opp!", 1, true);
 
+  /* Prepare LED rings */
   readyNeos();
 }
 void loop() {
 
+  // Update time
   curTime = millis();
 
   /* 
    * Waiting for teams to join and start 
    */
   if (printInfo) {
+    /* Instruct the user in how to start */
     displayOnBoth("Trykk for a bli med!", 1, true);
     displayOnBoth("Og oppa for a starte", 2, true);
 
-    // lcds[0].setCursor(0,0);
-    // lcds[0].write(byte(0));
-    
+    /* Set each teams led rings to blue (standard) */
     setTeamColor(0,0,255, 0);
     setTeamColor(0,0,255, 1);
-    
+
+    /* Dont print this again */
     printInfo = false;
   }
   if (waitingForTeamsToJoin) {
-    //  Check for teams
+    /* Check for teams */
     if (!digitalRead(but1A) || !digitalRead(but1B) || !digitalRead(but1C)) {
       // team 1 has joined
       teamJoined = true;
@@ -213,10 +209,10 @@ void loop() {
       tone(piezo, NOTE_C4, 150);
     }
 
-    // A team has joined
+    /* If a team has joined */
     if (teamJoined) {
       if (!digitalRead(playBut)) {
-        // Start
+        // Start, if they push the play button
         waitingForTeamsToJoin = false;
         prevTime = curTime;
         shouldRun = true;
@@ -232,31 +228,15 @@ void loop() {
    */
   if (shouldRun) {
 
+    /* Currently available points */
     curPoints = (questionTime - (curTime - prevTime)) / 10;
-
-    /*
-    neoPoints = ((((curPoints) - 0) * 16) / 1191) + 0;
-    // Make leds reflect time left
-    for (int i = neoPoints; i < 0; i--) {
-      neos[0].setPixelColor(neoPoints, 255,255,255);
-      neos[1].setPixelColor(neoPoints, 255,255,255);
-    }
-    
-    
-    if (!team1HasAnswered && !team2HasAnswered) {
-      neos[0].setPixelColor(neoPoints, 255,255,255);
-      neos[0].setPixelColor(neoPoints, 255,255,255);
-      neos[0].show();
-      neos[1].show();
-    }
-    */
-    
   
-    // If next question exists
+    /* If next question exists */
     if (hasNextQuestion()) {
   
-      // If question has not been printed, print it
+      /* If question has not been printed, print it */
       if (printNextQuestion) {
+        // Set team colors to blue (standard)
         setTeamColor(0,0,255, 0);
         setTeamColor(0,0,255, 1);
         printQuestion();
@@ -266,28 +246,22 @@ void loop() {
 
       
   
-      // Listen for answers
+      /* Listen for answers */
       listenForAnswers();
 
       
   
-      // If time is up,
-      // or question has been answered by both teams
+      /* If time is up, or question has been answered by both teams */
       if (hasWaited(curTime, questionTime) || questionIsAnswered) {
   
-        // If one or more teams have not answered
-        if (!questionIsAnswered) {
-          Serial.println("\nTiden er ute!");
-        }
-  
-        // Display scores
+        /* Display scores */
         displayScores();
   
-        // Reset for next loop
+        /* Reset for next round */
         resetForNextLoop();
         resetRoundPoints();
   
-        // If there is a next question, display it
+        /* If there is a next question, display it */
         if (hasNextQuestion()) {
           delay(coolDownTime);
           printNextQuestion = true;
@@ -298,12 +272,12 @@ void loop() {
     }
   
   
-    // If has no more questions and scores have not been displayed
+    /* If no more questions available, and scores have not been displayed */
     if (!hasNextQuestion() && !displayedScores) {
   
-      // Display scores
+      /* Display scores */
       if (getLeadingTeam() >= 0) {
-        // If there is a winner
+        // If there is a winner, define winner and loser
         int w = getLeadingTeam();
         int l = getLeadingTeam() == 1 ? 0 : 1;
   
@@ -336,31 +310,36 @@ void loop() {
           lcds[i].print(" poeng!");
         }
       }
+      // Scores have now been displayed
       displayedScores = true;
       
     }
 
-    // Reset if is finished
+    /* Reset if current game is finished, on user input */
     if (!digitalRead(playBut) && !hasNextQuestion()) {
       
       if (curQuestionId < questionTotalAmount) {
+        // There are more questions available
         setQuestion(curQuestionId);
       } else {
+        // No more questions available; restart 
         curQuestionId = 0;
         setQuestion(0);
       }
-      
+
+      /* Restart and reset data */
       questionCount = 0;
       resetRoundPoints();
       points[0] = 0;
       points[1] = 0;
+
+      /* Wait for user input to start */
       shouldRun = false;
       printInfo = true;
       waitingForTeamsToJoin = true;
       teamJoined = false;
-        
+
       printNextQuestion = true;
-      teamsAnswered = 0;
       questionIsAnswered = false;
       displayedScores = false;
     }
@@ -377,20 +356,23 @@ void loop() {
  * Resetting data
  */
 void resetRoundPoints() {
+  // Resets each teams points for each round
   roundPoints[0] = 0;
   roundPoints[1] = 0;
 }
 void resetForNextLoop() {
-  teamsAnswered = 0;
+  // Resets data for next round
   questionIsAnswered = false;
   team1HasAnswered = false;
   team2HasAnswered = false;
   team1Answer = -1;
   team2Answer = -1;
 
+  // Get next question
   questionCount++;
   nextQuestion();
 
+  // Reset time and points
   prevTime = curTime;
 }
 
@@ -401,6 +383,7 @@ void resetForNextLoop() {
  * Q and A
  */
 boolean hasWaited(unsigned long curTime, int delayTime) {
+  // Returns true if user has waited [delayTime] amount of time
   if ((curTime - prevTime) >= delayTime) {
     prevTime = curTime;
     return true;
@@ -409,8 +392,7 @@ boolean hasWaited(unsigned long curTime, int delayTime) {
 }
 
 void printQuestion() {
-  
-  // Print to monitor
+  // Print to monitor for debugging
   Serial.print("\nSporsmal ");
   Serial.print((questionCount + 1));
   Serial.println(":");
@@ -418,54 +400,67 @@ void printQuestion() {
   Serial.println("A: " + curQuestion[1] + ". B: " + curQuestion[2] + ". C: " + curQuestion[3]);
   Serial.println();
 
+  // Print question number
   clearDisplays();
-  
   String question = "Sporsmal ";
   question = question + (questionCount + 1);
   displayOnBoth(question, 1, true);
   
   delay(2000);
-  
+
+  // Print the question
   clearDisplays();
   displayOnBoth(curQuestion[0], 0, false);
   
   delay(4000);
 
+  // Print the alternatives
   clearDisplays();
   displayOnBoth("A: " + curQuestion[1], 0, false);
   displayOnBoth("B: " + curQuestion[2], 1, false);
   displayOnBoth("C: " + curQuestion[3], 2, false);
 }
 void setQuestion(int id) {
+  // Sets the current question, with alternatives
   for (int i = 0; i < 5; i++) {
     curQuestion[i] = questions[id][i];
   }
 }
 void nextQuestion() {
+  // Sets a new (the next) question
   curQuestionId++;
   setQuestion(curQuestionId);
 }
 boolean hasNextQuestion() {
+  // Returns true if there is another question available
   if (questionCount < questionAmount) return true;
   return false;
 }
 int getAnswerId() {
+  // Returns which alternative is correct
   return curQuestion[4].toInt();
 }
 
 boolean answerQuestion(int answer, int team) {
+  /* Answers a question */
 
+  // Set the chosen alternative's color to white
   setRingColor(255,255,255, team, answer, 1);
-  
+
+  // Get the correct answer
   int correctAnswer = getAnswerId();
   correctAnswer--;
-  
+
+  // User is correct if their answer equals the correct answer
   boolean isCorrect = (answer == correctAnswer);
-  
+
+  // Is user answered correctly
   if (isCorrect) {
+    // Award them points (both current round, and total)
     roundPoints[team] = curPoints;
     points[team] += curPoints;
-    
+
+    // Print to monitor for debugging
     Serial.print("Lag ");
     Serial.print(team);
     Serial.print(": ");
@@ -478,6 +473,7 @@ boolean answerQuestion(int answer, int team) {
   }
 
   switch (team) {
+    // When a team answers, update their answer status
     case 0:
       team1HasAnswered = true;
       team1Answer = answer;
@@ -488,23 +484,23 @@ boolean answerQuestion(int answer, int team) {
       break;
   }
 
-  teamsAnswered++;
   return isCorrect;
 }
 void listenForAnswers() {
+  /* Listens for answers from the user */
+  
   /* Team 1 */
   if (!team1HasAnswered) {
     if (!digitalRead(but1A)) {
       answerQuestion(0, 0);
+      tone(piezo, NOTE_C4, 150);
     }
     else if (!digitalRead(but1B)) {
       answerQuestion(1, 0);
+      tone(piezo, NOTE_C4, 150);
     }
     else if (!digitalRead(but1C)) {
       answerQuestion(2, 0);
-    }
-    
-    if (!digitalRead(but1A) || !digitalRead(but1B) || !digitalRead(but1C)) {
       tone(piezo, NOTE_C4, 150);
     }
   }
@@ -513,23 +509,24 @@ void listenForAnswers() {
   if (!team2HasAnswered) {
     if (!digitalRead(but2A)) {
       answerQuestion(0, 1);
+      tone(piezo, NOTE_C4, 150);
     }
     else if (!digitalRead(but2B)) {
       answerQuestion(1, 1);
+      tone(piezo, NOTE_C4, 150);
     }
     else if (!digitalRead(but2C)) {
       answerQuestion(2, 1);
-    }
-    
-    if (!digitalRead(but2A) || !digitalRead(but2B) || !digitalRead(but2C)) {
       tone(piezo, NOTE_C4, 150);
     }
   }
 
-  /* If both teams have answered, question is answered */
-  if (teamsAnswered > 1) questionIsAnswered = true;
+  /* If both teams have answered, question is considered answered/finished */
+  if (team1HasAnswered && team2HasAnswered) questionIsAnswered = true;
 }
 int getLeadingTeam() {
+  // Returns the id of the leading team
+  // negative if there is a draw
   if (points[0] > points[1]) return 0;
   else if (points[0] < points[1]) return 1;
   else return -1;
@@ -542,50 +539,52 @@ int getLeadingTeam() {
  * LCD printing
  */
 void readyScreens() {
-  lcds[0].begin(20, 4);
-  lcds[0].setCursor(0, 0);
-  lcds[1].begin(20,4);
-  lcds[1].setCursor(0,0);
-
+  // Prepares displays
   for (int i = 0; i < 2; i++) {
     lcds[i].begin(20, 4);
     lcds[i].setCursor(0, 0);
   }
 }
 void clearLine(int row, int team) {
+  // Clears a chosen line on the display
   lcds[team].setCursor(0, row);
   lcds[team].print("                    ");
   lcds[team].setCursor(0, row);
 }
 void clearDisplays() {
+  // Clears all displays
   lcds[0].clear();
   lcds[1].clear();
 }
 void displayScores() {
+  // Displays scores
   clearDisplays();
 
   String team1Points = " poeng",
          team2Points = " poeng";
 
+  // Get correct answer
   int correctAnswer = curQuestion[4].toInt();
   correctAnswer--;
 
+  /* TODO: remove this?
   // Set team colors
   for (int i = 0; i < 2; i++) {
     setTeamColor(255,0,0, i);
   }
-  
+  */
 
   /*
-   * Alle ringar gront viss rett, rodt viss ikkje (prikka gront rundt det rette svaret)
+   * All rings are green if correct, red if not (dotted green around the correct answer)
    */
   if (team1HasAnswered) {
     if (team1Answer == correctAnswer) {
-      // Rett svar
+      // Correct answer
       setTeamColor(0,255,0, 0);
       displayText("Rett svar!", 1, true, 0);
     } else {
-      // Feil svar
+      // Wrong answer
+      // Make correct answer dotted green
       setRingColor(0,0,0,   0, correctAnswer, 1);
       setRingColor(0,255,0, 0, correctAnswer, 2);
       displayText("Feil svar!", 1, true, 0);
@@ -593,29 +592,32 @@ void displayScores() {
   }
   if (team2HasAnswered) {
     if (team2Answer == correctAnswer) {
-      // Rett svar
+      // Correct answer
       setTeamColor(0,255,0, 1);
       displayText("Rett svar!", 1, true, 1);
     } else {
-      // Feil svar
+      // Wrong answer
+      // Make correct answer dotted green
       setRingColor(0,0,0,   1, correctAnswer, 1);
       setRingColor(0,255,0, 1, correctAnswer, 2);
       displayText("Feil svar!", 1, true, 1);
     }
   }
-  
+
+  // Display how many points each team got
   team1Points = (roundPoints[0]) + team1Points;
   team2Points = (roundPoints[1]) + team2Points;
-
   displayText(team1Points, 2, true, 0);
   displayText(team2Points, 2, true, 1);
-  
+
+  // Print to monitor for debugging
   Serial.print("Lag 1: ");
   Serial.print(points[0]);
   Serial.print(". Lag 2: ");
   Serial.println(points[1]);
 }
 void centerPrintText(String text, int row, int team) {
+  // Prints text on lcd, centered
   lcds[team].setCursor(0, row);
   
   int length = text.length();
@@ -632,21 +634,23 @@ void displayText(String text, int row, boolean center, int team) {
   clearLine(row, team);
 
   if (center) { 
+    // Centered text must be under 20 characters
     centerPrintText(text, row, team); 
     return;
   }
-  
+
+  // Define the LCD's constraints
   int maxLines = 4;
   int maxLength = 20;
   
   if (text.length() <= maxLength) {
-
+    // If text is under 20 characters long, print it
     lcds[team].setCursor(0, row);
     lcds[team].print(text);
       
   } else {
-
-    int curLine = row;
+    // If text is more than 20 characters long
+    
     String curLineText = "";
     int cutStartPos = 0;
     int cutStopPos= 0;
@@ -654,19 +658,22 @@ void displayText(String text, int row, boolean center, int team) {
 
     String printLines[4];
 
+    // Create printable sentence
     for (int i = 0; i < 80; i++) {
       if (text.charAt(i) == '#') {
           
         cutStopPos = i;
         curLineText = text.substring(cutStartPos, cutStopPos);
         cutStartPos = (cutStopPos+1);
-        
+
+        // Add to final sentence
         printLines[lines] = curLineText;
         
         lines++;
       }
     }
 
+    // Print final sentence
     for (int i = 0; i < lines; i++) {
       lcds[team].setCursor(0, (row+i));
       lcds[team].print(printLines[i]);
@@ -675,6 +682,7 @@ void displayText(String text, int row, boolean center, int team) {
   }
 }
 void displayOnBoth(String text, int row, boolean center) {
+  // Displays text on both lcds
   for (int i = 0; i < 2; i++) {
     displayText(text, row, center, i);
   }
@@ -686,26 +694,21 @@ void displayOnBoth(String text, int row, boolean center) {
 /* 
  * LED rings
  */
-void colorWipe(uint32_t c, uint8_t wait) {
-  /*for(uint16_t i=0; i<strip.numPixels(); i++) {
-      strip.setPixelColor(i, c);
-      strip.show();
-      delay(wait);
-  }*/
-}
 void setRingColor(int r,int g,int b, int team, int ring, int interval) {
+  // Sets a color on a [team]'s chosen [ring]. Interval defines if it is each pixel, or every other, etc
   for (int i = neoPixels[ring][0]; i < neoPixels[ring][1]; i += interval) {
     neos[team].setPixelColor(i, r,g,b);
   }
   neos[team].show();
 }
 void setTeamColor(int r,int g,int b, int team) {
+  // Sets the ring color on all of a [team]'s rings
   for (int i = 0; i < 3; i++) {
     setRingColor(r,g,b, team, i, 1);
   }
 }
 void readyNeos() {
-  // Define rings
+  // Initialize and set brightness of LED rings
   for (int i = 0; i < 2; i++) {
     neos[i].begin();
     neos[i].setBrightness(BRIGHTNESS);
