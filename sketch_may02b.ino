@@ -6,10 +6,10 @@
 const int questionAmount = 10;
 const int questionTotalAmount = 30;
 const String questions [questionTotalAmount][5] = {
-  {"Hvem er stats-#minister i Norge?#",                                "Siv Jensen",        "Erna Solberg",       "Jens Stoltenberg",  "2" },
-  {"Hvor mange seter er#det pa Stortinget?#",                          "150",               "142",                "169",               "3" },
-  {"Hvor mange testa-#menter er det i#Bibelen?#",                      "2",                 "3",                  "4",                 "1" },
-  {"Hvilke partier#sitter i regjering?#",                              "Hoyre og FrP",      "Hoyre, KrF og FrP",  "V, H, og FrP",    "1" },
+  {"Hvem er stats-#minister i Norge?#",                                "Siv Jensen", "Erna Solberg", "Jens Stoltenberg", "2" },
+  {"Hvor mange seter er#det pa Stortinget?#",                          "150", "142", "169", "3" },
+  {"Hvor mange testa-#menter er det i#Bibelen?#",                      "2", "3", "4", "1" },
+  {"Hvilke partier#sitter i regjering?#",                              "Hoyre og FrP", "Hoyre, KrF og FrP", "V, H, og FrP", "1" },
   {"Hvilke partier gir#parlamentarisk#stotte til#regjeringen?#",       "Venstre", "KrF og FrP", "KrF og Venstre", "3" },
   {"Hvilken religion#tror pa#treenigheten?#",                          "Buddhismen", "Kristendommen", "Islam", "2" },
   {"Hva er divali?",                                                   "Lysfestival", "Nyttarsfeiring", "Blomsterfestival", "1" },
@@ -22,51 +22,22 @@ const String questions [questionTotalAmount][5] = {
   {"Hvem er leder#for KrF?#",                                          "Knut Arild Hareide#", "Karl I. Hagen", "Sylvi Listhaug", "1" },
   {"Hvilket parti er#tradisjonelt opptatt#av landbruk?#",              "Senterpartiet", "Arbeiderpartiet", "FrP", "1" },
   {"Hva er den#strengeste straffen#man kan fa i Norge?#",              "Dodsstraff", "18 ar fengsel", "21 ar fengsel", "3" },
-  {"Hvem har den#lovgivende makt i#Norge?#",                           "Stortinget", "Regjeringen", "Domstolene", "1" },
-  {"Hvem er Norges#finansminister?#",                                  "Jonas Gahr Store", "Siv Jensen", "Torbjorn Jagland", "2" },
+  {"Talmud er en hellig#tekst i hvilken#religion?#",                   "Jodedommen", "Hinduismen", "Islam", "1" },
+  {"Hvilken religion#anser ikke Jesus#som en profet?#",                "Kristendommen", "Islam", "Hinduismen", "3" },
   {"Hvem er Norges#utenriksminister?#",                                "Sylvi Listhaug", "Borge Brende", "Hadia Tajik", "2" },
   {"Hvem er FOR olje-#utvinning i Nordland#Troms og Finnmark?#",       "Venstre", "FrP", "Rodt", "2" },
   {"Toraen er en hellige#tekst i hvilken#religion?#",                  "Islam", "Jodedommen", "Buddhismen", "2" },
   
   {"Hvem har den#utovende makten i#Norge?#",                           "Domstolene", "Stortinget", "Regjeringen", "3" },
   {"Hva heter samenes#folkevalgte for-#samling?#",                     "Samestortinget", "Samelauget", "Sametinget", "3" },
-  {"Hvem er leder for#et departement?#",                               "Statsminister", "Statsrad", "Depts.direktør", "2" },
-  {"Hvem er Norges#formelle stats-#overhode?#",                        "Statsministeren", "Kongen", "Stortings-#   presidenten#", "2" },
+  {"Hvem leder bonnen#i en moske?#",                                   "Presten", "Imamen", "Rabbiner", "2" },
+  {"Hvem er overste#leder for den#katolske kirke?#",                   "Dalai Lama", "Paven", "Kardinalen", "2" },
   {"Hvilken styreform#har Norge?#",                                    "Demokrati", "Oligarki", "Diktatur", "1" },
   {"Hvilke internasjonale#samarbeid er Norge#ikke medlem av?#",        "NATO", "EU", "FN", "2" },
   {"Hva er den#overste retts-#instansen i Norge?#",                    "Hoyesterett", "Tingretten", "Lagmannsretten", "1" },
-  {"Hva er den streng-#este straffen man#kan fa i Norge?#",            "Dodsstraff", "18 ar fengsel", "21 ar fengsel", "3" },
-  {"Hvilken type#demokrati har Norge?#",                               "Direkte demokr.", "Indirekte demokr.", "Likhetsdemokr.", "2" },
+  {"Hvilken religion er#bygget på de#fem soylene?#",                   "Islam", "Hinduismen", "Jodedommen", "1" },
+  {"Hva kalles jode-#dommens gudshus?#",                               "Moske", "Tempel", "Synagoge", "3" },
   {"Hvilke politiske#parti sitter ikke#pa Stortinget?#",               "Rodt", "MPG", "SV", "1" },
-  
-/*
-  {"Hvor mange folke-#avstemninger har#Norge hatt om#EU-medlemskap?#",  "Ingen", "2", "4", "2" },
-  {"Hvilken religion er#ikke monoteistisk?#",                           "Islam", "Jodedommen", "Hinduismen", "3" },
-  {"Hvilken religion#tror pa#treenigheten?#",                           "Buddhismen", "Kristendommen", "Islam", "2" },
-  {"Hvilken religion er#bygget på de#fem soylene?#",                    "Islam", "Hinduismen", "Jodedommen", "1" },
-  {"Hva kalles jode-#dommens gudshus?#",                                  "Moske", "Tempel", "Synagoge", "3" },
-  {"Hvem leder bonnen#i en moske?#",                                    "Presten", "Imamen", "Rabbiner", "2" },
-  {"Hvem er overste#leder for den#katolske kirke?#",                    "Dalai Lama", "Paven", "Kardinalen", "2" },
-  {"Hvilken religion#feirer hoytiden#Divali?#",                         "Buddhismen", "Hinduismen", "Jodedommen", "2" },
-  {"Hvilken religion#feirer hoytiden#Hanukka?#",                        "Hinduismen", "Jodedommen", "Kristendommen", "2" },
-  {"Rabbiner er en#religios leder i#hvilken religion?#",                "Buddhismen", "Islam", "Jodedommen", "3" },
-  /*
-  {"Hvilken religion#feirer Eid?#",                                     "Islam", "Kristendommen", "Jodedommen", "1" },
-  {"Hvorfor feirer#kristne jul?#",                                      "Jesu dod", "Jesu fodsel", "Jesu oppstandelse", "2" },
-  // {"Hvorfor feirer#muslimer Mawlid?#",                                  "Muhammeds fodsel", "Muhammeds apenbaring", "Muhammeds død", "1" },
-  {"Hvem tror ikke#pa reinkarnasjon?#",                                 "Buddhister", "Hinduister", "Kristne", "3" },
-  {"Hvilken religion#feirer Bar/Bat#Mitzva?#",                          "Buddhismen", "Jodedommen", "Hinduismen", "2" },
-  {"Hvilken religion#feirer Vesak?#",                                   "Kristendommen", "Jodedommen", "Buddhismen", "3" },
-  {"Hvilken religion er#grunnlagt av#Siddharta Gautama?#",              "Jodedommen", "Buddhismen", "Hinduismen", "2" },
-  {"Talmud er en hellig#tekst i hvilken#religion?#",                    "Jodedommen", "Hinduismen", "Islam", "1" },
-  {"Hvilken religion#anser ikke Jesus#som en profet?#",                 "Kristendommen", "Islam", "Hinduismen", "3" },
-  {"Hvilken religion har#flest tilhengere?#",                           "Islam", "Kristendom", "Hinduismen", "2" },
-  {"Koranen er en#hellig tekst i#hvilken religion?#",                   "Islam", "Jodedommen", "Buddhismen", "1" },
-
-  /*
-  {"Hvem tror ikke på reinkarnasjon?", "Buddhister", "Hinduister", "Kristne", "3" },
-  {"Hva er ikke en jødisk høytid?", "Hannuka", "Rosj Hasjaná", "Olsok", "3" },
-  */
 };
 
 
@@ -91,8 +62,14 @@ unsigned long curTime;
 boolean shouldRun;
 boolean shouldPrintInfo;
 boolean waitingForTeamsToJoin;
-boolean teamJoined;
 boolean displayedScores;
+
+/* Teams */
+int currentTeam = -1;
+boolean singlePlayer = false;
+boolean team1HasJoined = false;
+boolean team2HasJoined = false;
+
 
 /* Pins */
 const int piezo = 52;
@@ -146,14 +123,13 @@ void setup() {
   shouldRun = false;
   shouldPrintInfo = true;
   waitingForTeamsToJoin = true;
-  teamJoined = false;
 
   /* Dont print questions until user is ready */
   printNextQuestion = true;
   questionIsAnswered = false;
   displayedScores = false;
 
-  /* Prepare inputs */
+  /* Prepare pullup inputs */
   pinMode(but1A, INPUT_PULLUP);
   pinMode(but1B, INPUT_PULLUP);
   pinMode(but1C, INPUT_PULLUP);
@@ -191,18 +167,20 @@ void loop() {
   }
   if (waitingForTeamsToJoin) {
     /* Check for teams */
-    if (!digitalRead(but1A) || !digitalRead(but1B) || !digitalRead(but1C)) {
+    if (!digitalRead(but1A) || !digitalRead(but1B) || !digitalRead(but1C) && !team1HasJoined) {
       // team 1 has joined
-      teamJoined = true;
+      team1HasJoined = true;
+      currentTeam = 0;
       setTeamColor(255,255,255, 0);
       clearLine(2, 0);
       displayText("Du er med!", 1, true, 0);
       displayText("Start: trykk oppa", 2, true, 0);
       tone(piezo, NOTE_C4, 150);
     }
-    if (!digitalRead(but2A) || !digitalRead(but2B) || !digitalRead(but2C)) {
+    if (!digitalRead(but2A) || !digitalRead(but2B) || !digitalRead(but2C) && !team2HasJoined) {
       // team 2 has joined
-      teamJoined = true;
+      team2HasJoined = true;
+      currentTeam = 1;
       setTeamColor(255,255,255, 1);
       clearLine(2, 1);
       displayText("Du er med!", 1, true, 1);
@@ -211,13 +189,18 @@ void loop() {
     }
 
     /* If a team has joined */
-    if (teamJoined) {
+    if (team1HasJoined || team2HasJoined) {
       if (!digitalRead(playBut)) {
         // Start, if they push the play button
         waitingForTeamsToJoin = false;
         prevTime = curTime;
         shouldRun = true;
         tone(piezo, NOTE_F3, 250);
+
+        if (!(team1HasJoined && team2HasJoined)) {
+          // If only one of the teams have joined, enable singleplayer mode
+          singlePlayer = true;
+        }
       }
     }
   }
@@ -237,9 +220,12 @@ void loop() {
   
       /* If question has not been printed, print it */
       if (printNextQuestion) {
+        
         // Set team colors to blue (standard)
-        setTeamColor(0,0,255, 0);
-        setTeamColor(0,0,255, 1);
+        if (singlePlayer) setTeamColor(0,0,255, currentTeam);
+        else setBothTeamColors(0,0,255);
+
+        // Print the question
         printQuestion();
         
         printNextQuestion = false; // Dont print it again
@@ -277,39 +263,50 @@ void loop() {
     if (!hasNextQuestion() && !displayedScores) {
   
       /* Display scores */
-      if (getLeadingTeam() >= 0) {
-        // If there is a winner, define winner and loser
-        int w = getLeadingTeam();
-        int l = getLeadingTeam() == 1 ? 0 : 1;
-  
-        // Print winner message
-        lcds[w].clear();
-        lcds[w].setCursor(5, 1);
-        lcds[w].print("Gratulerer");
-        lcds[w].setCursor(5, 2);
-        lcds[w].print(points[w]);
-        lcds[w].print(" poeng");
-        setTeamColor(0,255,0, w);
-  
-        // Print loser message
-        lcds[l].clear();
-        lcds[l].setCursor(0, 1);
-        lcds[l].print("Kanskje neste gang..");
-        lcds[l].setCursor(5, 2);
-        lcds[l].print(points[l]);
-        lcds[l].print(" poeng");
-        setTeamColor(255,0,0, l);
-        
-      } else {
-        // If there is a draw
-        clearDisplays();
-        for (int i = 0; i < 2; i++) {
-          lcds[i].setCursor(6, 1);
-          lcds[i].print("Uavgjort");
-          lcds[i].setCursor(5, 2);
-          lcds[i].print(points[i]);
-          lcds[i].print(" poeng!");
+      if (!singlePlayer) {
+        // If is multiplayer mode
+        if (getLeadingTeam() >= 0) {
+          // If there is a winner, define winner and loser
+          int w = getLeadingTeam();
+          int l = getLeadingTeam() == 1 ? 0 : 1;
+    
+          // Print winner message
+          lcds[w].clear();
+          lcds[w].setCursor(5, 1);
+          lcds[w].print("Gratulerer");
+          lcds[w].setCursor(5, 2);
+          lcds[w].print(points[w]);
+          lcds[w].print(" poeng");
+          setTeamColor(0,255,0, w);
+    
+          // Print loser message
+          lcds[l].clear();
+          lcds[l].setCursor(0, 1);
+          lcds[l].print("Kanskje neste gang..");
+          lcds[l].setCursor(5, 2);
+          lcds[l].print(points[l]);
+          lcds[l].print(" poeng");
+          setTeamColor(255,0,0, l);
+          
+        } else {
+          // If there is a draw
+          clearDisplays();
+          for (int i = 0; i < 2; i++) {
+            lcds[i].setCursor(6, 1);
+            lcds[i].print("Uavgjort");
+            lcds[i].setCursor(5, 2);
+            lcds[i].print(points[i]);
+            lcds[i].print(" poeng!");
+          }
         }
+      } else {
+        // If singleplayer mode, only display on active display
+        clearDisplays();
+        String score = " poeng";
+        score = points[currentTeam] + score;
+        displayText("Bra jobba!", 1, true, currentTeam);
+        displayText(score, 2, true, currentTeam);
+        setTeamColor(0,255,0, currentTeam);
       }
       // Scores have now been displayed
       displayedScores = true;
@@ -333,16 +330,17 @@ void loop() {
       resetRoundPoints();
       points[0] = 0;
       points[1] = 0;
+      printNextQuestion = true;
+      questionIsAnswered = false;
+      displayedScores = false;
+      currentTeam = -1;
+      singlePlayer = false;
 
       /* Wait for user input to start */
       shouldRun = false;
       shouldPrintInfo = true;
       waitingForTeamsToJoin = true;
-      teamJoined = false;
-
-      printNextQuestion = true;
-      questionIsAnswered = false;
-      displayedScores = false;
+      team1HasJoined, team2HasJoined = false;
     }
 
   }
@@ -405,21 +403,28 @@ void printQuestion() {
   clearDisplays();
   String question = "Sporsmal ";
   question = question + (questionCount + 1);
-  displayOnBoth(question, 1, true);
+  if (singlePlayer) displayText(question, 1, true, currentTeam);
+  else displayOnBoth(question, 1, true);
   
   delay(2000);
 
   // Print the question
   clearDisplays();
-  displayOnBoth(curQuestion[0], 0, false);
+  if (singlePlayer) displayText(curQuestion[0], 0, false, currentTeam);
+  else displayOnBoth(curQuestion[0], 0, false);
   
   delay(4000);
 
   // Print the alternatives
   clearDisplays();
-  displayOnBoth("A: " + curQuestion[1], 0, false);
-  displayOnBoth("B: " + curQuestion[2], 1, false);
-  displayOnBoth("C: " + curQuestion[3], 2, false);
+  if (singlePlayer) 
+    displayText("A: " + curQuestion[1], 0, false, currentTeam), 
+    displayText("B: " + curQuestion[2], 1, false, currentTeam), 
+    displayText("C: " + curQuestion[3], 2, false, currentTeam);
+  else 
+    displayOnBoth("A: " + curQuestion[1], 0, false),
+    displayOnBoth("B: " + curQuestion[2], 1, false),
+    displayOnBoth("C: " + curQuestion[3], 2, false);
 }
 void setQuestion(int id) {
   // Sets the current question, with alternatives
@@ -445,47 +450,51 @@ int getAnswerId() {
 boolean answerQuestion(int answer, int team) {
   /* Answers a question */
 
-  // Set the chosen alternative's color to white
-  setRingColor(255,255,255, team, answer, 1);
+  if (!singlePlayer || (singlePlayer && team == currentTeam)) {
 
-  // Get the correct answer
-  int correctAnswer = getAnswerId();
-  correctAnswer--;
+    // Set the chosen alternative's color to white
+    setRingColor(255,255,255, team, answer, 1);
+  
+    // Get the correct answer
+    int correctAnswer = getAnswerId();
+    correctAnswer--;
+  
+    // User is correct if their answer equals the correct answer
+    boolean isCorrect = (answer == correctAnswer);
+  
+    // Is user answered correctly
+    if (isCorrect) {
+      // Award them points (both current round, and total)
+      roundPoints[team] = curPoints;
+      points[team] += curPoints;
+  
+      // Print to monitor for debugging
+      Serial.print("Lag ");
+      Serial.print(team);
+      Serial.print(": ");
+      Serial.print(curPoints);
+      Serial.println(" poeng!");
+    } else {
+      Serial.print("Lag ");
+      Serial.print(team);
+      Serial.println(": Feil svar!");
+    }
+  
+    switch (team) {
+      // When a team answers, update their answer status
+      case 0:
+        team1HasAnswered = true;
+        team1Answer = answer;
+        break;
+      case 1:
+        team2HasAnswered = true;
+        team2Answer = answer;
+        break;
+    }
 
-  // User is correct if their answer equals the correct answer
-  boolean isCorrect = (answer == correctAnswer);
-
-  // Is user answered correctly
-  if (isCorrect) {
-    // Award them points (both current round, and total)
-    roundPoints[team] = curPoints;
-    points[team] += curPoints;
-
-    // Print to monitor for debugging
-    Serial.print("Lag ");
-    Serial.print(team);
-    Serial.print(": ");
-    Serial.print(curPoints);
-    Serial.println(" poeng!");
-  } else {
-    Serial.print("Lag ");
-    Serial.print(team);
-    Serial.println(": Feil svar!");
+    return isCorrect;
+  
   }
-
-  switch (team) {
-    // When a team answers, update their answer status
-    case 0:
-      team1HasAnswered = true;
-      team1Answer = answer;
-      break;
-    case 1:
-      team2HasAnswered = true;
-      team2Answer = answer;
-      break;
-  }
-
-  return isCorrect;
 }
 void listenForAnswers() {
   /* Listens for answers from the user */
@@ -523,7 +532,9 @@ void listenForAnswers() {
   }
 
   /* If both teams have answered, question is considered answered/finished */
-  if (team1HasAnswered && team2HasAnswered) questionIsAnswered = true;
+  if ((team1HasAnswered && team2HasAnswered) || 
+      (singlePlayer && (team1HasAnswered||team2HasAnswered))) 
+      questionIsAnswered = true;
 }
 int getLeadingTeam() {
   // Returns the id of the leading team
@@ -568,12 +579,12 @@ void displayScores() {
   int correctAnswer = curQuestion[4].toInt();
   correctAnswer--;
 
-  /* TODO: remove this?
   // Set team colors
-  for (int i = 0; i < 2; i++) {
+  int spi = (singlePlayer ? currentTeam : 0);
+  int spo = (singlePlayer ? (currentTeam+1) : 2);
+  for (int i = spi; i < spo; i++) {
     setTeamColor(255,0,0, i);
   }
-  */
 
   /*
    * All rings are green if correct, red if not (dotted green around the correct answer)
@@ -606,10 +617,12 @@ void displayScores() {
   }
 
   // Display how many points each team got
-  team1Points = (roundPoints[0]) + team1Points;
-  team2Points = (roundPoints[1]) + team2Points;
-  displayText(team1Points, 2, true, 0);
-  displayText(team2Points, 2, true, 1);
+  if (!singlePlayer) {
+    team1Points = (roundPoints[0]) + team1Points;
+    team2Points = (roundPoints[1]) + team2Points;
+    displayText(team1Points, 2, true, 0);
+    displayText(team2Points, 2, true, 1);
+  }
 
   // Print to monitor for debugging
   Serial.print("Lag 1: ");
@@ -707,6 +720,11 @@ void setTeamColor(int r,int g,int b, int team) {
   for (int i = 0; i < 3; i++) {
     setRingColor(r,g,b, team, i, 1);
   }
+}
+void setBothTeamColors(int r,int g,int b) {
+  // Sets both team's circles to same color
+  setTeamColor(r,g,b, 0);
+  setTeamColor(r,g,b, 1);
 }
 void readyNeos() {
   // Initialize and set brightness of LED rings
